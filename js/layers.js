@@ -1338,7 +1338,7 @@ addLayer("u", {
         return eff2
     },
     effectDescription() {
-        return "which "+pluralize(player.u.points,'boosts','boost',true)+" cases and infectivity by "+layerText("h2", "u", format(tmp.u.effect))+", and "+pluralize(player.u.points,'boosts','boost',true)+" 'Uncoating' by "+layerText("h2", "u", format(tmp.u.effect2))
+        return "which "+pluralize(player.u.points,'boosts','boost',true)+" cases and infectivity by "+layerText("h2", "u", format(tmp.u.effect))+", 并且"+pluralize(player.u.points,'加成','加成',true)+" '脱壳者' "+layerText("h2", "u", format(tmp.u.effect2))
     },
     gainMult() {
         umult = decimalOne
@@ -3957,109 +3957,109 @@ addLayer("d", {
     },
 })
 addLayer("stat", {
-    name: "Statistics", // This is optional, only used in a few places, If absent it just uses the layer id.
-    symbol: "ST", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    name: "统计信息", // 这是可选的，仅在少数地方使用，如果没有则默认使用层ID。
+    symbol: "ST", // 显示在层的节点上。默认是层ID的首字母大写
+    position: 0, // 行内的水平位置。默认使用层ID并按字母顺序排序
     startData() { return {
         unlocked: true,
         points: decimalZero,
     }},
     tooltip() {
-      return "Statistics"
+      return "统计信息"
     },
     color: "#FFFFFF",
-    requires: decimalZero, // Can be a function that takes requirement increases into account
-    resource: "points", // Name of prestige currency
-    type: "none", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 0.5, // Prestige currency exponent
-    row: "side", // Row the layer is in on the tree (0 is the first row)
+    requires: decimalZero, // 可以是一个考虑需求增加的函数
+    resource: "点数", // 声望货币名称
+    type: "none", // normal: 获得货币的成本取决于已获得的量。static: 成本取决于你已经拥有的量
+    exponent: 0.5, // 声望货币指数
+    row: "side", // 层在树中的行（0是第一行）
     layerShown() { return true },
     tabFormat: {
-        "Main": {
+        "主要": {
         content:[
             "blank",
         ["raw-html", 
             function () {
                 if (player.tab == "stat") {
-                let a = "You have "+formatWhole(player.points)+" cases.<br><br>"
-                let b = "You have "+formatWhole(player.v.points)+" virus points.<br><br>"
-                let c = player.i.unlocked?"You have "+formatWhole(player.i.points)+" infectivity.<br><br>":""
-                let d = player.r.unlocked?"You have "+formatWhole(player.r.points)+" replicators.<br><br>":""
-                let e = player.u.unlocked?"You have "+formatWhole(player.u.points)+" uncoaters.<br><br>":""
-                let f = player.s.unlocked?"You have "+formatWhole(player.s.points)+" symptoms.<br><br>":""
-                let g = player.s.unlocked?"You have "+formatWhole(player.s.severity)+" severity.<br><br>":""
-                let h = player.d.unlocked?"You have "+formatWhole(player.d.points)+" deaths.<br><br>":""
-                let h2 = player.f.unlocked?"You have "+formatWhole(player.f.points)+" fatality.<br><br>":""
-                let h3 = player.e.unlocked?"You have "+formatWhole(player.e.points)+" infecters.<br><br>":""
-                let h4 = player.ct.unlocked?"You have "+formatWhole(player.ct.points)+" CTNA.<br><br>":""
-                let i = "'Infection' base:"+format(tmp.v.upgrades[12].base)+"<br><br>"
-                let j = player.r.unlocked?"Replicator base:"+format(tmp.r.effbase)+"<br><br>":""
-                let k = player.u.unlocked?"Uncoater base:"+format(tmp.u.effbase)+"<br><br>":""
-                let l = player.s.unlocked?"Symptom base:"+format(tmp.s.effbase)+"<br><br>":""
-                let m = player.e.unlocked?"Infecter base:"+format(tmp.e.effbase)+"<br><br>":""
-                let n = hasSUpg(31) || player.d.unlocked?"'Smell Loss' autobuy:"+formatWhole(tmp.s.bulk)+"/" + format(1/tmp.s.speed)+"s (" + format(Decimal.mul(tmp.s.bulk,tmp.s.speed)) + "/s)<br><br>":""
-                let o = hasFUpg(25)?"'More Fatal' autobuy:"+formatWhole(tmp.d.bulk)+"/" + format(1/tmp.d.speed)+"s (" + format(Decimal.mul(tmp.d.bulk,tmp.d.speed)) + "/s)<br><br>":""
-                let p = hasFUpg(187)?"'More Exponenter' autobuy:"+formatWhole(tmp.f.bulk)+"/" + format(1/tmp.f.speed)+"s (" + format(Decimal.mul(tmp.f.bulk,tmp.f.speed)) + "/s)<br><br>":""
-                let q = player.d.buyables[13].gte(2500)?"'Cases Boost' softcap start:"+format(tmp.d.buyables[13].scStart)+"<br><br>":""
-                let r = hasMilestone("f",6)?"Multiplier per Fatality Dimension:"+format(tmp.f.multpd)+"<br><br>":""
-                let s = player.f.total.gte(Decimal.pow(10,1e3))?"Fatality Dimension Scaling:"+format(tmp.f.DimScaling)+"<br><br>":""
-                let t = player.f.total.gte(Decimal.pow(10,420).mul(6.969))?"Fatality Dimension Boost Scaling:"+format(tmp.f.buyables[32].scale)+"<br><br>":""
-                let u = player.f.buyables[33].gte(100)?"Distant Multiplier Boost Scaling Start:"+format(tmp.f.buyables[33].distantStart)+"<br><br>":""
-                let v = player.f.buyables[33].gte(10000)?"Social Distant Multiplier Boost Scaling Start:"+format(tmp.f.buyables[33].sStart)+"<br><br>":""
-                let w = player.e.rna.gte(Decimal.pow(10,1e3))?"Immunity exponent:"+format(tmp.e.iexp)+"<br><br>":""
-                let x = hasUpgrade("ct",22)?"After log exponent:"+format(tmp.e.crme)+"<br><br>":""
-                let y = hasUpgrade("ct",145)?"Green Exponent:"+format(tmp.ct.getGreenExp)+"<br><br>":""
-                let z = hasUpgrade("ct",166)?"Anti-接种者 Base:"+format(tmp.ct.getVaxxerBase.b1)+"<br><br>":""
-                let aa = hasUpgrade("ct",166)?"Anti-接种者 Cost Base:"+format(tmp.ct.getVaxcostBase)+"<br><br>":""
-                let ab = hasUpgrade("ct",194)?"Anti-Capped CTNA Effect slog:"+format(tmp.ct.getAntiCapCTNA)+"<br><br>":""
-                let ab2 = hasUpgrade("ct",194)?"Anti-Capped CTNA Total Effect slog:"+format(tmp.ct.aCapCtna)+"<br><br>":""
-                let ac = player.e.points.gte(tet10(40))?"Social Distant Infecter scaling start:"+format(tet10(tmp.e.scStart))+"<br><br>":""
-                let ad = player.ct.buyables[181].gte(298)?"Distant UI Gain scaling start:"+format(tmp.ct.buyables[181].start)+"<br><br>":""
-                let ae = player.ct.buyables[181].gte(298)?"Distant UI Gain scaling base:"+format(tmp.ct.buyables[181].dbase,(tmp.ct.buyables[181].dbase.lt(1.001)?5:tmp.ct.buyables[181].dbase.lt(1.01)?4:3))+"<br><br>":""
-                let af = player.ct.buyables[181].gte(1e4)?"Social Distant UI Gain scaling start:"+format(tmp.ct.buyables[181].sstart)+"<br><br>":""
-                let ag = player.e.points.gte(tet10(2e7))?"Quarantined Infecter scaling start:"+format(tet10(tmp.e.qStart))+"<br><br>":""
+                let a = "你有 "+formatWhole(player.points)+" 个病例。<br><br>"
+                let b = "你有 "+formatWhole(player.v.points)+" 病毒点数。<br><br>"
+                let c = player.i.unlocked?"你有 "+formatWhole(player.i.points)+" 传染性。<br><br>":""
+                let d = player.r.unlocked?"你有 "+formatWhole(player.r.points)+" 复制体。<br><br>":""
+                let e = player.u.unlocked?"你有 "+formatWhole(player.u.points)+" 脱壳体。<br><br>":""
+                let f = player.s.unlocked?"你有 "+formatWhole(player.s.points)+" 症状。<br><br>":""
+                let g = player.s.unlocked?"你有 "+formatWhole(player.s.severity)+" 严重程度。<br><br>":""
+                let h = player.d.unlocked?"你有 "+formatWhole(player.d.points)+" 死亡人数。<br><br>":""
+                let h2 = player.f.unlocked?"你有 "+formatWhole(player.f.points)+" 致命性。<br><br>":""
+                let h3 = player.e.unlocked?"你有 "+formatWhole(player.e.points)+" 感染体。<br><br>":""
+                let h4 = player.ct.unlocked?"你有 "+formatWhole(player.ct.points)+" CTNA。<br><br>":""
+                let i = "'感染' 基础："+format(tmp.v.upgrades[12].base)+"<br><br>"
+                let j = player.r.unlocked?"复制体基础："+format(tmp.r.effbase)+"<br><br>":""
+                let k = player.u.unlocked?"脱壳体基础："+format(tmp.u.effbase)+"<br><br>":""
+                let l = player.s.unlocked?"症状基础："+format(tmp.s.effbase)+"<br><br>":""
+                let m = player.e.unlocked?"感染体基础："+format(tmp.e.effbase)+"<br><br>":""
+                let n = hasSUpg(31) || player.d.unlocked?"'嗅觉丧失' 自动购买："+formatWhole(tmp.s.bulk)+"/" + format(1/tmp.s.speed)+"秒 (" + format(Decimal.mul(tmp.s.bulk,tmp.s.speed)) + "/秒)<br><br>":""
+                let o = hasFUpg(25)?"'更多致命' 自动购买："+formatWhole(tmp.d.bulk)+"/" + format(1/tmp.d.speed)+"秒 (" + format(Decimal.mul(tmp.d.bulk,tmp.d.speed)) + "/秒)<br><br>":""
+                let p = hasFUpg(187)?"'更多指数器' 自动购买："+formatWhole(tmp.f.bulk)+"/" + format(1/tmp.f.speed)+"秒 (" + format(Decimal.mul(tmp.f.bulk,tmp.f.speed)) + "/秒)<br><br>":""
+                let q = player.d.buyables[13].gte(2500)?"'病例提升' 软上限起始："+format(tmp.d.buyables[13].scStart)+"<br><br>":""
+                let r = hasMilestone("f",6)?"每个致命维度的倍数："+format(tmp.f.multpd)+"<br><br>":""
+                let s = player.f.total.gte(Decimal.pow(10,1e3))?"致命维度缩放："+format(tmp.f.DimScaling)+"<br><br>":""
+                let t = player.f.total.gte(Decimal.pow(10,420).mul(6.969))?"致命维度提升缩放："+format(tmp.f.buyables[32].scale)+"<br><br>":""
+                let u = player.f.buyables[33].gte(100)?"遥远倍数提升缩放起始："+format(tmp.f.buyables[33].distantStart)+"<br><br>":""
+                let v = player.f.buyables[33].gte(10000)?"社交遥远倍数提升缩放起始："+format(tmp.f.buyables[33].sStart)+"<br><br>":""
+                let w = player.e.rna.gte(Decimal.pow(10,1e3))?"免疫指数："+format(tmp.e.iexp)+"<br><br>":""
+                let x = hasUpgrade("ct",22)?"对数后指数："+format(tmp.e.crme)+"<br><br>":""
+                let y = hasUpgrade("ct",145)?"绿色指数："+format(tmp.ct.getGreenExp)+"<br><br>":""
+                let z = hasUpgrade("ct",166)?"反接种者基础："+format(tmp.ct.getVaxxerBase.b1)+"<br><br>":""
+                let aa = hasUpgrade("ct",166)?"反接种者成本基础："+format(tmp.ct.getVaxcostBase)+"<br><br>":""
+                let ab = hasUpgrade("ct",194)?"反上限 CTNA 效果对数标度："+format(tmp.ct.getAntiCapCTNA)+"<br><br>":""
+                let ab2 = hasUpgrade("ct",194)?"反上限 CTNA 总效果对数标度："+format(tmp.ct.aCapCtna)+"<br><br>":""
+                let ac = player.e.points.gte(tet10(40))?"社交遥远感染体缩放起始："+format(tet10(tmp.e.scStart))+"<br><br>":""
+                let ad = player.ct.buyables[181].gte(298)?"遥远 UI 获取缩放起始："+format(tmp.ct.buyables[181].start)+"<br><br>":""
+                let ae = player.ct.buyables[181].gte(298)?"遥远 UI 获取缩放基础："+format(tmp.ct.buyables[181].dbase,(tmp.ct.buyables[181].dbase.lt(1.001)?5:tmp.ct.buyables[181].dbase.lt(1.01)?4:3))+"<br><br>":""
+                let af = player.ct.buyables[181].gte(1e4)?"社交遥远 UI 获取缩放起始："+format(tmp.ct.buyables[181].sstart)+"<br><br>":""
+                let ag = player.e.points.gte(tet10(2e7))?"隔离感染体缩放起始："+format(tet10(tmp.e.qStart))+"<br><br>":""
                 return a+b+c+d+e+f+g+h+h2+h3+h4+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+x+y+z+aa+ab+ab2+ac+ad+ae+af+ag
                 }
             }],
             ]
         },
-        "Cases Representation": { // From AD NG+++
+        "病例表示": { // 来自 AD NG+++
             content:[
             "blank",
             ["raw-html", 
             function () {
                 if (player.tab == "stat") { 
                 let x = player.points.max(1e-111)
-                let a = "You have "+format(x)+" cases.<br><br>"
+                let a = "你有 "+format(x)+" 个病例。<br><br>"
                 let p = 6.187e34**3*1e-21
                 let height = slog(x).floor().div(100)
                 let digits = x.log10().floor().add(1).div(3)
                 let years = digits.div(31556952)
                 let unis = years.div(13.78e9) 
                 let size = formatSize(Decimal.div(1e-21,x.min(p)).root(3))
-                let b = "If every case were the size of SARS-VoC-3, and SARS-VoC-3 is "+size+" in diameter, you would have enough to make a SARS-CoV-2 virus."
-                if (height.gte(8.8e26)) b = "If every 10 in the cases power tower were 1 centimeter tall, the power tower would be "+formatSize(height) + " tall."
-                else if (height.gte(1.71)) b = "If every 10 in the cases power tower were 1 centimeter tall, the power tower would be "+formatSize(height) + " tall (" + heightComp(height) + ")."
-                else if (x.gte(tet10(100))) b = "If every 10 in the cases power tower were 1 centimeter tall, the power tower would be "+formatSize(height) + " tall (" + format(height.div(0.0171)) + "% of your height)."
-                else if (years.gte(1e40)) b = "The time needed to finish writing your full cases amount at a rate of 3 digits per second would span " + formatTimeLong(digits)+"."
+                let b = "如果每个病例都是 SARS-VoC-3 的大小，而 SARS-VoC-3 的直径是 "+size+"，你将足够制造一个 SARS-CoV-2 病毒。"
+                if (height.gte(8.8e26)) b = "如果病例幂塔中的每个10都是1厘米高，那么幂塔将有 "+formatSize(height) + " 高。"
+                else if (height.gte(1.71)) b = "如果病例幂塔中的每个10都是1厘米高，那么幂塔将有 "+formatSize(height) + " 高（" + heightComp(height) + "）。"
+                else if (x.gte(tet10(100))) b = "如果病例幂塔中的每个10都是1厘米高，那么幂塔将有 "+formatSize(height) + " 高（" + format(height.div(0.0171)) + "% 你的身高）。"
+                else if (years.gte(1e40)) b = "以每秒3位数字的速度写完你的全部病例数量所需的时间将跨越 " + formatTimeLong(digits)+"。"
                 else if (years.gte(1e9)) {
-                    b = "The time needed to finish writing your full cases amount at a rate of 3 digits per second would span "
-                    if (unis.lt(1)) b+= format(unis.mul(100)) + "% of the age of the universe."
-                    else b+= format(unis) + " times the age of the universe."
+                    b = "以每秒3位数字的速度写完你的全部病例数量所需的时间将跨越 "
+                    if (unis.lt(1)) b+= format(unis.mul(100)) + "% 的宇宙年龄。"
+                    else b+= format(unis) + " 倍的宇宙年龄。"
                 }
-                else if (years.gte(2022)) b = "If you wanted to finish writing out your cases amount at a rate of 3 digits per second, you would need to start it in " + eventsTime(years)
-                else if (x.gte(Decimal.pow(10,750739887.08))) {b = "If you wrote 3 digits of your cases amount every second since you were born, you would "
-                    if (years.gte(79.3)) b += "be a ghost for " + format(years.sub(79.3).div(years).mul(100)) + "% of the session."
-	                else b += "waste " + format(years.div(0.793)) + "% of your projected average lifespan."
+                else if (years.gte(2022)) b = "如果你想以每秒3位数字的速度写出你的病例数量，你需要从 " + eventsTime(years) + " 开始"
+                else if (x.gte(Decimal.pow(10,750739887.08))) {b = "如果你从出生起每秒钟写3位数字的病例数量，你将 "
+                    if (years.gte(79.3)) b += "有 " + format(years.sub(79.3).div(years).mul(100)) + "% 的时间处于鬼魂状态。"
+	                else b += "浪费 " + format(years.div(0.793)) + "% 的你预计平均寿命。"
                 }
-                else if (x.gte("ee5")) b = "If you wrote 3 digits per second, it would take "+formatTime(digits)+" to write down your cases."
-                else if (x.gte(p)) b = "If every case were the size of SARS-VoC-3, and SARS-VoC-3 is 1 Planck Length in diameter, you would have enough to make "+formatComp(x.mul(2.2108845e-105))
+                else if (x.gte("ee5")) b = "如果你每秒写3位数字，需要 "+formatTime(digits)+" 来写下你的病例。"
+                else if (x.gte(p)) b = "如果每个病例都是 SARS-VoC-3 的大小，而 SARS-VoC-3 的直径是1普朗克长度，你将足够制造 "+formatComp(x.mul(2.2108845e-105))
                 return a+b
                 }
             }],
             ],
         },
-        "Booster Vaccine Stats": {
+        "增强剂疫苗统计": {
             content:[
             "blank",
             ["raw-html", 
@@ -4074,14 +4074,14 @@ addLayer("stat", {
                     let bslog = slogadd(bexp,tmp.ct.getBoosterSlog)
                     let mult = getGainMultSlog().div(1e9)
                     let cap = tmp.uv.slogCap
-                let a = "Base cases gain: "+format(base)+" cases/s.<br><br>"
-                let b = "Base cases gain in 'Booster Vaccine' ("+format(bmult)+"x): "+format(bgain)+" cases/s.<br><br>"
-                let c = "Base cases gain in 'Booster Vaccine' with exponents (^"+format(exp)+"):"+format(bexp)+" cases/s.<br><br>"
-                let d = "Base cases gain in 'Booster Vaccine' with exponents and slog adders (+"+format(tmp.ct.getBoosterSlog)+"): "+format(bslog.min(mult.pow(cap).max("ee10")))+" (caps at "+format(mult.pow(cap).max("ee10"))+") cases/s.<br><br>"
-                let e = "Cases gain multiplier after slog: "+format(mult)+"x.<br><br>"
-                let f = "Total cases gain: "+format(bslog.min(mult.pow(cap).max("ee10")).mul(mult))+" cases/s.<br><br>"
-                let g = "Total cases gain with exponents (^"+format(cexp)+"): "+format(bslog.min(mult.pow(cap).max("ee10")).mul(mult).pow(cexp))+" cases/s.<br><br>"
-                let h = "Base gain cap exponent (After slog mult<sup>exp</sup>): "+format(cap)+".<br><br>"
+                let a = "基础病例获取："+format(base)+" 病例/秒。<br><br>"
+                let b = "'增强剂疫苗'中的基础病例获取（"+format(bmult)+"x）："+format(bgain)+" 病例/秒。<br><br>"
+                let c = "'增强剂疫苗'中带指数的基础病例获取（^"+format(exp)+"）："+format(bexp)+" 病例/秒。<br><br>"
+                let d = "'增强剂疫苗'中带指数和对数标度加法器（+"+format(tmp.ct.getBoosterSlog)+"）的基础病例获取："+format(bslog.min(mult.pow(cap).max("ee10")))+"（上限为 "+format(mult.pow(cap).max("ee10"))+"）病例/秒。<br><br>"
+                let e = "对数标度后的病例获取倍数："+format(mult)+"x。<br><br>"
+                let f = "总病例获取："+format(bslog.min(mult.pow(cap).max("ee10")).mul(mult))+" 病例/秒。<br><br>"
+                let g = "带指数的总病例获取（^"+format(cexp)+"）："+format(bslog.min(mult.pow(cap).max("ee10")).mul(mult).pow(cexp))+" 病例/秒。<br><br>"
+                let h = "基础获取上限指数（对数标度倍数<sup>指数</sup>之后）："+format(cap)+"。<br><br>"
                 return a+b+c+d+e+f+g+h
                 }
             }],
@@ -5910,9 +5910,9 @@ addLayer("a", {
     },
 })
 addLayer("uv", {
-    name: "未接种 Layers", // This is optional, only used in a few places, If absent it just uses the layer id.
-    symbol: "Un", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 3, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    name: "未接种层", // 这是可选的，仅在少数地方使用，如果没有则默认使用层ID。
+    symbol: "Un", // 显示在层的节点上。默认是层ID的首字母大写
+    position: 3, // 行内的水平位置。默认使用层ID并按字母顺序排序
     startData() { return {
         unlocked: true,
         points: decimalZero,
@@ -5954,15 +5954,15 @@ addLayer("uv", {
         player.uv.cool = Math.max(player.uv.cool-diff,0)
     },
     tooltip() {
-        let dis = "未接种 Layers"
+        let dis = "未接种层"
         if (player.uv.uvUnlocked) {
-            dis = formatWhole(player.uv.virus) + " UnBoosted "+pluralize(player.uv.virus,'Virus','Viruses',true) 
+            dis = formatWhole(player.uv.virus) + " 未增强 "+pluralize(player.uv.virus,'病毒','病毒',true) 
             if (inChallenge("ct",32)) {
-                dis += " (+"+formatWhole(tmp.uv.clickables[31].gain)+" on reset)"
+                dis += " (+"+formatWhole(tmp.uv.clickables[31].gain)+" 重置时)"
             }
         }
         if (inChallenge("ct",32)) {
-            if ((tmp.e.clickables[31].canClick || tmp.e.clickables[32].canClick ) && !player.Us.automut) dis += " (You can mutate!)"
+            if ((tmp.e.clickables[31].canClick || tmp.e.clickables[32].canClick ) && !player.Us.automut) dis += " (你可以突变!)"
         }
       return dis
     },
@@ -5973,12 +5973,12 @@ addLayer("uv", {
     nodeStyle() {return {
         "background": "radial-gradient(#383434, #153d63)" ,
     }},
-    requires: decimalZero, // Can be a function that takes requirement increases into account
-    resource: "未接种 Layers", // Name of prestige currency
-    resourceSingular: "未接种 Layer",
-    type: "none", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 0.5, // Prestige currency exponent
-    row: "side", // Row the layer is in on the tree (0 is the first row)
+    requires: decimalZero, // 可以是一个考虑需求增加的函数
+    resource: "未接种层", // 声望货币名称
+    resourceSingular: "未接种层",
+    type: "none", // normal: 获得货币的成本取决于已获得的量。static: 成本取决于你已经拥有的量
+    exponent: 0.5, // 声望货币指数
+    row: "side", // 层在树中的行（0是第一行）
     layerShown() { return player.ct.bestCases.gt(0) || hasUpgrade("ct",314) },
     effLayers() {
         let x = player.uv.points.add(tmp.uv.buyables[103].effect)
@@ -6048,38 +6048,38 @@ addLayer("uv", {
     },
     microtabs: {
         upg: {
-            "Upgrades": {
+            "upg": {
                 content: [
-                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "UnBoosted Viruses" && player.subtabs.uv.upg == "Upgrades") return ["upgrades",[5,6,7,8,9,10]]},
+                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "未增强病毒" && player.subtabs.uv.upg == "升级") return ["upgrades",[5,6,7,8,9,10]]},
                 ],
             },
-            "Upgrades2": {
+            "upg2": {
                 content: [
-                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "UnBoosted Viruses" && player.subtabs.uv.upg == "Upgrades2") return ["upgrades",[11,12,13,14,15,16]]},
+                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "未增强病毒" && player.subtabs.uv.upg == "升级2") return ["upgrades",[11,12,13,14,15,16]]},
                 ],
                 unlocked() {return hasUpgrade("uv",106)}
             },
-            "Upgrades3": {
+            "upg3": {
                 content: [
-                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "UnBoosted Viruses" && player.subtabs.uv.upg == "Upgrades3") return ["upgrades",[17,18]]},
+                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "未增强病毒" && player.subtabs.uv.upg == "升级3") return ["upgrades",[17,18]]},
                 ],
                 unlocked() {return false}
             },
-            "Cooldown Upgrades": {
+            "cool upg": {
                 content: [
-                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "UnBoosted Viruses" && player.subtabs.uv.upg == "Cooldown Upgrades") return ["buyables",[2,3,4,5]]},
+                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "未增强病毒" && player.subtabs.uv.upg == "冷却升级") return ["buyables",[2,3,4,5]]},
                 ],
                 unlocked() {return true}
             },
         },
     },
     tabFormat: {
-        "Main": {
+        "main": {
         content:[
              ["display-text", 
                 function() {
-                    let a = "You have unlocked "+layerText("h2", "uv", formatWhole(player.uv.points))+" 未接种 "+pluralize(player.uv.points,'Layer','Layers',true)+" ("+layerText("h2", "uv", format(tmp.uv.effLayers))+" effective)<br><br>"
-                    let b = inChallenge("ct",32)?"":"<h2>Start 'Booster Vaccine' to unlock this tab.</h2>"
+                    let a = "你已解锁 "+layerText("h2", "uv", formatWhole(player.uv.points))+" 未接种 "+pluralize(player.uv.points,'层','层',true)+"（"+layerText("h2", "uv", format(tmp.uv.effLayers))+" 有效）<br><br>"
+                    let b = inChallenge("ct",32)?"":"<h2>启动'增强剂疫苗'以解锁此标签页。</h2>"
                     return a+b
                 }
                 ],
@@ -6089,11 +6089,11 @@ addLayer("uv", {
             ["buyables",[1]],
             ]
         },
-        "Upgrades": {
+        "upg": {
             content:[
                 ["display-text", 
                 function() {
-                    let a = "You have unlocked "+layerText("h2", "uv", formatWhole(player.uv.points))+" 未接种 "+pluralize(player.uv.points,'Layer','Layers',true)+" ("+layerText("h2", "uv", format(tmp.uv.effLayers))+" effective)<br><br>"
+                    let a = "你已解锁 "+layerText("h2", "uv", formatWhole(player.uv.points))+" 未接种 "+pluralize(player.uv.points,'层','层',true)+"（"+layerText("h2", "uv", format(tmp.uv.effLayers))+" 有效）<br><br>"
                     return a
                 }
                 ],
@@ -6104,16 +6104,16 @@ addLayer("uv", {
             content:[
                 ["display-text", 
                 function() {
-                    let a = "You have "+layerText("h2", "uv", formatWhole(player.uv.virus))+" UnBoosted "+pluralize(player.uv.virus,'Virus','Viruses',true)+", which "+pluralize(player.uv.virus,'boosts','boost',true)+" UV to US 未接种 resource gain by "+layerText("h2", "uv", format(tmp.uv.virusEff))+" (hold shift to see)<br><br>"
-                    let b = shiftDown?"Based on max(UnBoosted Viruses, Best UBV/3)<br>Boosts 未接种 virus, 未接种 infectivity, 未接种 replicator, 未接种 prion, 未接种 uncoater, 未接种 severity, 未接种 pathogen, 未接种 replicant, all protein, PrP, PrPSc, PrPres, uncoating power, uncoated enzyme, 未接种 tRNA gain":""
+                    let a = "你有 "+layerText("h2", "uv", formatWhole(player.uv.virus))+" 未增强 "+pluralize(player.uv.virus,'病毒','病毒',true)+"，它 "+pluralize(player.uv.virus,'提升','提升',true)+" UV 到 US 未接种资源获取 "+layerText("h2", "uv", format(tmp.uv.virusEff))+"（按住Shift查看）<br><br>"
+                    let b = shiftDown?"基于 max(未增强病毒, 最佳UBV/3)<br>提升未接种病毒、未接种传染性、未接种复制体、未接种朊病毒、未接种脱壳体、未接种严重程度、未接种病原体、未接种复制子、所有蛋白质、PrP、PrPSc、PrPres、脱壳能力、脱壳酶、未接种tRNA获取":""
                     return a+b
                 }
                 ],
             ["clickables",[3]],
             ["display-text", 
                 function() {
-                    let x = ["UnBoosted Viruses", "seconds"]
-                    if (hasUpgrade("uv",81)) return "Reset at x "+x[player.uv.autosetting%x.length]+" (type in Scientific, xFy = yptx)"
+                    let x = ["未增强病毒", "秒"]
+                    if (hasUpgrade("uv",81)) return "在 x "+x[player.uv.autosetting%x.length]+" 处重置（以科学计数法输入，xFy = yptx）"
                 }
             ], //1.9e4949035 = 19 covid
             function() { //e18578774880 = 1 태연
@@ -6133,19 +6133,19 @@ addLayer("uv", {
             "blank",
             ["display-text", 
                 function() {
-                    let best = "Your best UnBoosted Viruses is "+formatWhole(player.uv.virusBest)+"<br>"
-                    let total = "You have made a total of "+formatWhole(player.uv.virusTotal)+" UnBoosted "+pluralize(player.uv.virusTotal,'Virus','Viruses',true)+"<br>"
-                    let times = "You have reset "+formatWhole(player.uv.times)+pluralize(player.uv.times,' time',' times',true)+"<br>"
-                    let time = "Reset time: "+formatTime(player.ct.resetTime)+"<br>"
+                    let best = "你的最佳未增强病毒是 "+formatWhole(player.uv.virusBest)+"<br>"
+                    let total = "你总共制造了 "+formatWhole(player.uv.virusTotal)+" 未增强 "+pluralize(player.uv.virusTotal,'病毒','病毒',true)+"<br>"
+                    let times = "你已重置 "+formatWhole(player.uv.times)+pluralize(player.uv.times,' 次',' 次',true)+"<br>"
+                    let time = "重置时间："+formatTime(player.ct.resetTime)+"<br>"
                     let gainps = player.uv.bestPer
                     let bes = ""
-                    if (gainps.lt(1/60)) bes += format(gainps.mul(3600)) + "/hr"
-                    else if (gainps.lt(1)) bes += format(gainps.mul(60)) + "/min"
-                    else bes += format(gainps) + "/s"
-                    let bestps = "Your best UnBoosted Viruses/hr is "+bes+"<br>"
-                    let besttime = "Your best reset time is "+formatTime(player.uv.bestTime)+"<br>"
-                    let a = "Gain formula: "+format(tmp.uv.clickables[31].gainbase)+"<sup>(slog10(x)-4)<sup>"+format(tmp.uv.clickables[31].gainexp)+"</sup>-1</sup>*"+format(tmp.uv.clickables[31].gainmult)+"<br>"
-                    let b = "Effect formula: 10<sup>(log10(10(x+1))<sup>"+format(tmp.uv.virusEffDil)+"</sup>-1)*"+format(tmp.uv.virusEffExp)+"</sup><br>"
+                    if (gainps.lt(1/60)) bes += format(gainps.mul(3600)) + "/小时"
+                    else if (gainps.lt(1)) bes += format(gainps.mul(60)) + "/分钟"
+                    else bes += format(gainps) + "/秒"
+                    let bestps = "你的最佳未增强病毒/小时是 "+bes+"<br>"
+                    let besttime = "你的最佳重置时间是 "+formatTime(player.uv.bestTime)+"<br>"
+                    let a = "获取公式："+format(tmp.uv.clickables[31].gainbase)+"<sup>(slog10(x)-4)<sup>"+format(tmp.uv.clickables[31].gainexp)+"</sup>-1</sup>*"+format(tmp.uv.clickables[31].gainmult)+"<br>"
+                    let b = "效果公式：10<sup>(log10(10(x+1))<sup>"+format(tmp.uv.virusEffDil)+"</sup>-1)*"+format(tmp.uv.virusEffExp)+"</sup><br>"
                     return best+total+times+time+bestps+besttime+a+b
                 }
                 ],
@@ -6153,12 +6153,12 @@ addLayer("uv", {
             ],
             unlocked() { return player.uv.uvUnlocked }
         },
-        "Milestones": {
+        "Mil": {
             content:[
                 ["display-text", 
                 function() {
-                    let a = "You have "+layerText("h2", "uv", formatWhole(player.uv.virus))+" UnBoosted "+pluralize(player.uv.virus,'Virus','Viruses',true)+", which "+pluralize(player.uv.virus,'boosts','boost',true)+" 未接种 resource gain by "+layerText("h2", "uv", format(tmp.uv.virusEff))+" (hold shift to see)<br><br>"
-                    let b = shiftDown?"Boosts 未接种 virus, 未接种 infectivity, 未接种 replicator, 未接种 prion, 未接种 uncoater, 未接种 severity, 未接种 pathogen, 未接种 replicant, all protein, PrP, PrPSc, PrPres, uncoating power, uncoated enzyme, 未接种 tRNA gain":""
+                    let a = "你有 "+layerText("h2", "uv", formatWhole(player.uv.virus))+" 未增强 "+pluralize(player.uv.virus,'病毒','病毒',true)+"，它 "+pluralize(player.uv.virus,'提升','提升',true)+" 未接种资源获取 "+layerText("h2", "uv", format(tmp.uv.virusEff))+"（按住Shift查看）<br><br>"
+                    let b = shiftDown?"提升未接种病毒、未接种传染性、未接种复制体、未接种朊病毒、未接种脱壳体、未接种严重程度、未接种病原体、未接种复制子、所有蛋白质、PrP、PrPSc、PrPres、脱壳能力、脱壳酶、未接种tRNA获取":""
                     return a+b
                 }
                 ],
@@ -6166,12 +6166,12 @@ addLayer("uv", {
             ],
             unlocked() { return player.uv.uvUnlocked }
         },
-        "Buyables": {
+        "buy": {
             content:[
                 ["display-text", 
                 function() {
-                    let a = "You have "+layerText("h2", "uv", formatWhole(player.uv.virus))+" UnBoosted "+pluralize(player.uv.virus,'Virus','Viruses',true)+", which "+pluralize(player.uv.virus,'boosts','boost',true)+" 未接种 resource gain by "+layerText("h2", "uv", format(tmp.uv.virusEff))+" (hold shift to see)<br><br>"
-                    let b = shiftDown?"Boosts 未接种 virus, 未接种 infectivity, 未接种 replicator, 未接种 prion, 未接种 uncoater, 未接种 severity, 未接种 pathogen, 未接种 replicant, all protein, PrP, PrPSc, PrPres, uncoating power, uncoated enzyme, 未接种 tRNA gain":""
+                    let a = "你有 "+layerText("h2", "uv", formatWhole(player.uv.virus))+" 未增强 "+pluralize(player.uv.virus,'病毒','病毒',true)+"，它 "+pluralize(player.uv.virus,'提升','提升',true)+" 未接种资源获取 "+layerText("h2", "uv", format(tmp.uv.virusEff))+"（按住Shift查看）<br><br>"
+                    let b = shiftDown?"提升未接种病毒、未接种传染性、未接种复制体、未接种朊病毒、未接种脱壳体、未接种严重程度、未接种病原体、未接种复制子、所有蛋白质、PrP、PrPSc、PrPres、脱壳能力、脱壳酶、未接种tRNA获取":""
                     return a+b
                 }
                 ],
@@ -6188,7 +6188,7 @@ addLayer("uv", {
             fillStyle: {'background-color' : "#153d63"},
             display() {
                 let f = player.f.points.add(1).max(1)
-                let r = "'Booster Vaccine' progress: " + format(player.points)+"/"+format(tet10(Decimal.pow(2,1024).log10()))+" ("+ format(this.progress().mul(100))+"%)"
+                let r = "'增强剂疫苗'进度：" + format(player.points)+"/"+format(tet10(Decimal.pow(2,1024).log10()))+"（"+ format(this.progress().mul(100))+"%）"
                 return r
             },
             progress() { 
@@ -6212,13 +6212,13 @@ addLayer("uv", {
                 if (gain.gte(Decimal.pow(2,1024))) nx = Decimal.pow(2,Decimal.pow(2,gain.log(2).log(2).floor().add(1)))
                 let next = layers.uv.bars.un.next(nx)
                 let prog = this.progress().mul(100)
-                let r = "UnBoosted Viruses unlock progress: " + format(player.points)+"/"+format(tet10(5))+" ("+ format(prog)+"%)"
+                let r = "未增强病毒解锁进度：" + format(player.points)+"/"+format(tet10(5))+"（"+ format(prog)+"%）"
                 if (player.uv.uvUnlocked) {
                     if (gain.gt(0)) {
-                        r = "Percentage from " +formatWhole(prev)+ " to " + formatWhole(nx) + " UnBoosted Viruses ("+format(next)+"): " + format(prog)+"%"
+                        r = "从 " +formatWhole(prev)+ " 到 " + formatWhole(nx) + " 未增强病毒的百分比（"+format(next)+"）：" + format(prog)+"%"
                         
                     }
-                    else r = "Percentage to UnBoosted Viruses ("+format(player.points)+"/"+format(next)+"): " + format(prog)+"%"
+                    else r = "到未增强病毒的百分比（"+format(player.points)+"/"+format(next)+"）：" + format(prog)+"%"
                 }
                 return r
             },
@@ -6261,330 +6261,330 @@ addLayer("uv", {
     },
     milestones: {
         0: {
-            requirementDescription() {return "1 Total UnBoosted Virus (1)"},
-            effectDescription() {return "Keep 1st 4 rows of Main US upgrades, 1st 11 and 16th US milestones, 'UnRecover' cooldown is "+formatTime(30)+"."},
+            requirementDescription() {return "1 总未增强病毒 (1)"},
+            effectDescription() {return "保留主US升级的前4行，第1个和第16个US里程碑，'UnRecover'冷却时间为 "+formatTime(30)+"。"},
             done() { return player.uv.virusTotal.gte(1) }
         },
         1: {
-            requirementDescription() {return "2 Total UnBoosted Viruses (2)"},
-            effectDescription() {return "Keep 1st row of 未接种 tRNA upgrades, 1st 17 US milestones, 'UnRecover' cooldown is "+formatTime(25)+"."},
+            requirementDescription() {return "2 总未增强病毒 (2)"},
+            effectDescription() {return "保留未接种tRNA升级的第一行，前17个US里程碑，'UnRecover'冷却时间为 "+formatTime(25)+"。"},
             done() { return player.uv.virusTotal.gte(2) }
         },
         2: {
-            requirementDescription() {return "3 Total UnBoosted Viruses (3)"},
-            effectDescription() {return "Keep 2nd row of 未接种 tRNA upgrades and 1st 19 US milestones."},
+            requirementDescription() {return "3 总未增强病毒 (3)"},
+            effectDescription() {return "保留未接种tRNA升级的第二行和前19个US里程碑。"},
             done() { return player.uv.virusTotal.gte(3) }
         },
         3: {
-            requirementDescription() {return "4 Total UnBoosted Viruses (4)"},
-            effectDescription() {return "Buy max 未接种 tRNA buyables except 'tRNA Formula'."},
+            requirementDescription() {return "4 总未增强病毒 (4)"},
+            effectDescription() {return "最大购买未接种tRNA可购买项，除了'tRNA公式'。"},
             done() { return player.uv.virusTotal.gte(4) }
         },
         4: {
-            requirementDescription() {return "10 Total UnBoosted Viruses (5)"},
-            effectDescription() {return "Keep 1st 22 US milestones, 'UnRecover' cooldown is "+formatTime(20)+"."},
+            requirementDescription() {return "10 总未增强病毒 (5)"},
+            effectDescription() {return "保留前22个US里程碑，'UnRecover'冷却时间为 "+formatTime(20)+"。"},
             done() { return player.uv.virusTotal.gte(10) }
         },
         5: {
-            requirementDescription() {return formatTime(600)+" Best Reset Time (6)"},
+            requirementDescription() {return formatTime(600)+" 最佳重置时间 (6)"},
             effect() {
                 let eff = new Decimal(600/Math.max(player.uv.bestTime,1)).add(1)
                 return eff
             },
-            effectDescription() {return "Best reset time boosts UnBoosted Virus gain, 'UnRetRNA' cooldown is "+formatTime(50)+".<br>Currently: "+format(tmp.uv.milestones[5].effect)+'x'},
+            effectDescription() {return "最佳重置时间提升未增强病毒获取，'UnRetRNA'冷却时间为 "+formatTime(50)+"。<br>当前："+format(tmp.uv.milestones[5].effect)+'x'},
             done() { return player.uv.bestTime<=600 }
         },
         6: {
-            requirementDescription() {return formatTime(300)+" Best Reset Time (7)"},
-            effectDescription() {return "Unlock 'Max All' 未接种 tRNA buyables, 'UnRecover' cooldown is "+formatTime(15)+"."},
+            requirementDescription() {return formatTime(300)+" 最佳重置时间 (7)"},
+            effectDescription() {return "解锁'全部最大'未接种tRNA可购买项，'UnRecover'冷却时间为 "+formatTime(15)+"。"},
             done() { return player.uv.bestTime<=300 }
         },
         7: {
-            requirementDescription() {return "100 Total UnBoosted Viruses (8)"},
-            effectDescription() {return "'UnRetRNA' cooldown is "+formatTime(40)+"."},
+            requirementDescription() {return "100 总未增强病毒 (8)"},
+            effectDescription() {return "'UnRetRNA'冷却时间为 "+formatTime(40)+"。"},
             done() { return player.uv.virusTotal.gte(100) }
         },
         8: {
-            requirementDescription() {return formatTime(180)+" Best Reset Time (9)"},
-            effectDescription() {return "You can mutate in US, UnBoosted Virus effect exp+1, 'UnRetRNA' cooldown is "+formatTime(30)+"."},
+            requirementDescription() {return formatTime(180)+" 最佳重置时间 (9)"},
+            effectDescription() {return "你可以在US中突变，未增强病毒效果指数+1，'UnRetRNA'冷却时间为 "+formatTime(30)+"。"},
             done() { return player.uv.bestTime<=180 }
         },
         9: {
-            requirementDescription() {return "1,000 Total UnBoosted Viruses (10)"},
-            effectDescription() {return "Keep US milestone 23, 'UnRetRNA' cooldown is "+formatTime(25)+""},
+            requirementDescription() {return "1,000 总未增强病毒 (10)"},
+            effectDescription() {return "保留US里程碑23，'UnRetRNA'冷却时间为 "+formatTime(25)+""},
             done() { return player.uv.virusTotal.gte(1000) }
         },
         10: {
-            requirementDescription() {return formatTime(60)+" Best Reset Time (11)"},
+            requirementDescription() {return formatTime(60)+" 最佳重置时间 (11)"},
             toggles: [["Us","autotrna"]],
-            effectDescription() {return "Autoclick 'Max All' tRNA buyables, 'UnRetRNA' cooldown is "+formatTime(20)+"."},
+            effectDescription() {return "自动点击'全部最大'tRNA可购买项，'UnRetRNA'冷却时间为 "+formatTime(20)+"。"},
             done() { return player.uv.bestTime<=60 }
         },
         11: {
-            requirementDescription() {return formatTime(30)+" Best Reset Time (12)"},
+            requirementDescription() {return formatTime(30)+" 最佳重置时间 (12)"},
             toggles: [["Us","autoupg"]],
-            effectDescription() {return "Autobuy US upgrades, 'UnRetRNA' cooldown is "+formatTime(18)+".<br>Currently: "+formatTime(player.Us.upgCool)},
+            effectDescription() {return "自动购买US升级，'UnRetRNA'冷却时间为 "+formatTime(18)+"。<br>当前："+formatTime(player.Us.upgCool)},
             done() { return player.uv.bestTime<=30 }
         },
         12: {
-            requirementDescription() {return "1,000,000 Total UnBoosted Viruses (13)"},
+            requirementDescription() {return "1,000,000 总未增强病毒 (13)"},
             effect() {
                 let eff = tmp.ct.timeSpeed.pow(0.3)
                 if (hasAchievement("a",265)) eff = eff.pow(10/3)
                 return eff
             },
-            effectDescription() {return "Time speed boosts base anti-distance gain.<br>Currently: "+format(tmp.uv.milestones[12].effect)+'x'},
+            effectDescription() {return "时间速度提升基础反距离获取。<br>当前："+format(tmp.uv.milestones[12].effect)+'x'},
             done() { return player.uv.virusTotal.gte(1e6) }
         },
         13: {
-            requirementDescription() {return "10,000,000 Total UnBoosted Viruses (14)"},
-            effectDescription() {return "UnBoosted Virus gain exponent+0.5."},
+            requirementDescription() {return "10,000,000 总未增强病毒 (14)"},
+            effectDescription() {return "未增强病毒获取指数+0.5。"},
             done() { return player.uv.virusTotal.gte(1e7) }
         },
         14: {
-            requirementDescription() {return formatTime(10)+" Best Reset Time (15)"},
+            requirementDescription() {return formatTime(10)+" 最佳重置时间 (15)"},
             toggles: [["Us","automut"]],
-            effectDescription() {return "Autobuy mRNA Mutations, you can change percent of max mRNA Mutation attempts, UnBoosted Virus gain*5 at "+format("eee26e18")+" cases, MMNA effect^1.5 at "+format(1e120)+" MMNA, 'CytoMult' and 'GuanBase' are set to best Cytosine and Guanine effect, 'UnRetRNA' cooldown is "+formatTime(17)+".<br>Currently: "+formatTime(player.Us.mutCool)},
+            effectDescription() {return "自动购买mRNA突变，你可以更改最大mRNA突变尝试的百分比，在 "+format("eee26e18")+" 病例时未增强病毒获取*5，在 "+format(1e120)+" MMNA 时 MMNA 效果^1.5，'CytoMult'和'GuanBase'设置为最佳胞嘧啶和鸟嘌呤效果，'UnRetRNA'冷却时间为 "+formatTime(17)+"。<br>当前："+formatTime(player.Us.mutCool)},
             done() { return player.uv.bestTime<=10 }
         },
         15: {
-            requirementDescription() {return format(1e12)+" Total UnBoosted Viruses (16)"},
-            effectDescription() {return "Anti-Distance gain dilation+0.001, 'AdBases' eff^1.3, Anti-Vax type base gain is dilated^1.5, buy max 'Antiest-Booster Gain'."},
+            requirementDescription() {return format(1e12)+" 总未增强病毒 (16)"},
+            effectDescription() {return "反距离获取稀释+0.001，'AdBases'效果^1.3，反疫苗类型基础获取被稀释^1.5，最大购买'Antiest-Booster Gain'。"},
             done() { return player.uv.virusTotal.gte(1e12) }
         },
         16: {
-            requirementDescription() {return formatTime(5)+" Best Reset Time (17)"},
+            requirementDescription() {return formatTime(5)+" 最佳重置时间 (17)"},
             toggles: [["Us","autotmut"]],
             effect() {
                 let eff = player.Us.trna
                 let e = eff.add(10).log10().div(1e4).max(1).pow(0.2).div(2).min(1)
                 return e
             },
-            effectDescription() {return "Autobuy tRNA Mutations, you can change percent of max tRNA Mutation attempts, 未接种 severity effect is based on best, boosted recovery reductions at x tRNA start instantly, raise boosted recovery gain to x (min 0.5, increases with more tRNA starting at "+format("e1e4")+", max 1), 'UnRetRNA' cooldown is "+formatTime(16)+".<br>Currently: ^"+format(tmp.uv.milestones[16].effect)+", "+formatTime(player.Us.tmutCool)},
+            effectDescription() {return "自动购买tRNA突变，你可以更改最大tRNA突变尝试的百分比，未接种严重程度效果基于最佳值，在 x tRNA 开始时立即提升恢复减少，将提升恢复获取提升到 x（最小0.5，随更多tRNA增加，从 "+format("e1e4")+" 开始，最大1），'UnRetRNA'冷却时间为 "+formatTime(16)+"。<br>当前：^"+format(tmp.uv.milestones[16].effect)+"，"+formatTime(player.Us.tmutCool)},
             done() { return player.uv.bestTime<=5 }
         },
         17: {
-            requirementDescription() {return format(1e15)+" Total UnBoosted Viruses (18)"},
-            effectDescription() {return "Anti-Distance gain dilation+0.001, 'AdBases' eff^1.1, Anti-Vax type base gain is dilated^1.1."},
+            requirementDescription() {return format(1e15)+" 总未增强病毒 (18)"},
+            effectDescription() {return "反距离获取稀释+0.001，'AdBases'效果^1.1，反疫苗类型基础获取被稀释^1.1。"},
             done() { return player.uv.virusTotal.gte(1e15) }
         },
         18: {
-            requirementDescription() {return formatTime(4)+" Best Reset Time (19)"},
-            effectDescription() {return "Mutated rRNA buyables cost nothing, 'UnRetRNA' cooldown is "+formatTime(15)+"."},
+            requirementDescription() {return formatTime(4)+" 最佳重置时间 (19)"},
+            effectDescription() {return "突变的rRNA可购买项不花费任何东西，'UnRetRNA'冷却时间为 "+formatTime(15)+"。"},
             done() { return player.uv.bestTime<=4 }
         },
         19: {
-            requirementDescription() {return formatTime(3)+" Best Reset Time (20)"},
-            effectDescription() {return "You can buy max mutated rRNA buyables, 'UnRetRNA' cooldown is "+formatTime(14)+"."},
+            requirementDescription() {return formatTime(3)+" 最佳重置时间 (20)"},
+            effectDescription() {return "你可以最大购买突变的rRNA可购买项，'UnRetRNA'冷却时间为 "+formatTime(14)+"。"},
             done() { return player.uv.bestTime<=3 }
         },
         20: {
-            requirementDescription() {return "Reset for "+format(1e20)+" UnBoosted Viruses in "+formatTime(60)+" (21)"},
+            requirementDescription() {return "在 "+formatTime(60)+" 内重置以获得 "+format(1e20)+" 未增强病毒 (21)"},
             toggles: [["Us","autorrna"]],
-            effectDescription() {return "Autoclick 'Max All' mutated rRNA buyables, UnBoosted Virus gain base is "+format(202320242025)+",'UnRetRNA' cooldown is "+formatTime(13)+"."},
+            effectDescription() {return "自动点击'全部最大'突变的rRNA可购买项，未增强病毒获取基础为 "+format(202320242025)+"，'UnRetRNA'冷却时间为 "+formatTime(13)+"。"},
             done() { return player.uv.m20 }
         },
         21: {
-            requirementDescription() {return format(1e32)+" Total UnBoosted Viruses (22)"},
-            effectDescription() {return "Anti-Distance gain dilation+0.001, 'Distance Divider' exponent+0.005, time speed*3.2."},
+            requirementDescription() {return format(1e32)+" 总未增强病毒 (22)"},
+            effectDescription() {return "反距离获取稀释+0.001，'距离除数'指数+0.005，时间速度*3.2。"},
             done() { return player.uv.virusTotal.gte(1e32) }
         },
         22: {
-            requirementDescription() {return format(5e35)+" Total UnBoosted Viruses (23)"},
-            effectDescription() {return "Anti-Distance gain dilation+0.001, start with "+formatTimeLong(435e15)+" Adverse 接种者 reset time."},
+            requirementDescription() {return format(5e35)+" 总未增强病毒 (23)"},
+            effectDescription() {return "反距离获取稀释+0.001，以 "+formatTimeLong(435e15)+" 不良接种者重置时间开始。"},
             done() { return player.uv.virusTotal.gte(5e35) }
         },
         23: {
-            requirementDescription() {return " 7 Unlocked 未接种 Layers (24)"},
+            requirementDescription() {return " 7 已解锁未接种层 (24)"},
             toggles: [["ct","autoaest"]],
-            effectDescription() {return "Autobuy 'Antiest-Booster Gain'."},
+            effectDescription() {return "自动购买'Antiest-Booster Gain'。"},
             done() { return player.uv.points.gte(7) }
         },
         24: {
-            requirementDescription() {return "Reset for "+format(1e50)+" UnBoosted Viruses in "+formatTime(780)+" (25)"},
-            effectDescription() {return "Keep 1st 3 UD milestones, UD and CTNA gain*3, gain 0.5% of 未接种 death gain per second."},
+            requirementDescription() {return "在 "+formatTime(780)+" 内重置以获得 "+format(1e50)+" 未增强病毒 (25)"},
+            effectDescription() {return "保留前3个UD里程碑，UD和CTNA获取*3，每秒获得0.5%的未接种死亡获取。"},
             done() { return player.uv.m24 }
         },
         25: {
-            requirementDescription() {return "Reset for "+format(1e64)+" UnBoosted Viruses in "+formatTime(600)+" (26)"},
-            effectDescription() {return "Keep 1st 6 UD milestones, 1st 2 rows of UD upgrades, UD and CTNA gain*3 and again at "+format(1e71)+" Total UnBoosted Viruses, UnBoosted Virus effect dilation+0.3 at "+format("e935")+" UD."},
+            requirementDescription() {return "在 "+formatTime(600)+" 内重置以获得 "+format(1e64)+" 未增强病毒 (26)"},
+            effectDescription() {return "保留前6个UD里程碑，UD升级的前2行，UD和CTNA获取*3，并在 "+format(1e71)+" 总未增强病毒时再次*3，在 "+format("e935")+" UD 时未增强病毒效果稀释+0.3。"},
             done() { return player.uv.m25 }
         },
         26: {
-            requirementDescription() {return "Reset for "+format(6969e66)+" UnBoosted Viruses in "+formatTime(696.969)+" (27)"},
-            effectDescription() {return "Start with 50% of longest Adverse 接种者 reset time, keep 1st 8 UD milestones, UD and CTNA gain*3 and again at "+format(1e74)+"/"+format(1e77)+"/"+format(1e80)+" Total UnBoosted Viruses, UnBoosted Virus effect dilation+0.3 at "+format(1e37)+" CTNA."},
+            requirementDescription() {return "在 "+formatTime(696.969)+" 内重置以获得 "+format(6969e66)+" 未增强病毒 (27)"},
+            effectDescription() {return "以最长不良接种者重置时间的50%开始，保留前8个UD里程碑，UD和CTNA获取*3，并在 "+format(1e74)+"/"+format(1e77)+"/"+format(1e80)+" 总未增强病毒时再次*3，在 "+format(1e37)+" CTNA 时未增强病毒效果稀释+0.3。"},
             done() { return player.uv.m26 }
         },
         27: {
-            requirementDescription() {return "Reset for "+format(1e69)+" UnBoosted Viruses in "+formatTime(260.696)+" without 'Deadly Exponent' (28)"},
-            effectDescription() {return "Unlock 'Max All' 未接种 death buyables, UB11 is stronger at +37 effect."},
+            requirementDescription() {return "在 "+formatTime(260.696)+" 内不使用'致命指数'重置以获得 "+format(1e69)+" 未增强病毒 (28)"},
+            effectDescription() {return "解锁'全部最大'未接种死亡可购买项，UB11在+37效果时更强。"},
             done() { return player.uv.m27 }
         },
         28: {
-            requirementDescription() {return "Reset for "+format(1e80)+" UnBoosted Viruses in "+formatTime(90)+" (29)"},
+            requirementDescription() {return "在 "+formatTime(90)+" 内重置以获得 "+format(1e80)+" 未增强病毒 (29)"},
             toggles: [["Ud","auto"]],
-            effectDescription() {return "Autobuy UD buyables, keep 3rd row UD upgrades, 1st 12 and 16th UD milestones, UnBoosted Virus effect dilation+0.2 at "+format(1e98)+"/"+format(1e101)+"/"+format(1e105)+" Total UnBoosted Viruses, UB11 is stronger at +109 effect."},
+            effectDescription() {return "自动购买UD可购买项，保留UD升级第三行，前12个和第16个UD里程碑，在 "+format(1e98)+"/"+format(1e101)+"/"+format(1e105)+" 总未增强病毒时未增强病毒效果稀释+0.2，UB11在+109效果时更强。"},
             done() { return player.uv.m28 }
         },
         29: {
-            requirementDescription() {return "Reset for "+format(1e101)+" UnBoosted Viruses in "+formatTime(120)+" (30)"},
-            effectDescription() {return "Keep 4th row UD upgrades, 1st 18 and 23rd UD milestones."},
+            requirementDescription() {return "在 "+formatTime(120)+" 内重置以获得 "+format(1e101)+" 未增强病毒 (30)"},
+            effectDescription() {return "保留UD升级第四行，前18个和第23个UD里程碑。"},
             done() { return player.uv.m29 }
         },
         30: {
-            requirementDescription() {return format(1e130)+" Total UnBoosted Viruses (31)"},
+            requirementDescription() {return format(1e130)+" 总未增强病毒 (31)"},
             toggles: [["Ud","autoupg"]],
-            effectDescription() {return "Keep UD challenges and 40 challenge points, autobuy UD upgrades.<br>Currently: "+formatTime(player.Ud.upgCool)},
+            effectDescription() {return "保留UD挑战和40个挑战点数，自动购买UD升级。<br>当前："+formatTime(player.Ud.upgCool)},
             done() { return player.uv.virusTotal.gte(1e130) }
         },
         31: {
-            requirementDescription() {return format(1e147)+" Total UnBoosted Viruses (32)"},
-            effectDescription() {return "Unlock 'Max All' deadly mutation reward power buyables, UnBoosted Virus effect dilation+0.134 at "+format(1e150)+" Total UnBoosted Viruses."},
+            requirementDescription() {return format(1e147)+" 总未增强病毒 (32)"},
+            effectDescription() {return "解锁'全部最大'致命突变奖励力量可购买项，在 "+format(1e150)+" 总未增强病毒时未增强病毒效果稀释+0.134。"},
             done() { return player.uv.virusTotal.gte(1e147) }
         },
         32: {
-            requirementDescription() {return format(1e158)+" Total UnBoosted Viruses (33)"},
+            requirementDescription() {return format(1e158)+" 总未增强病毒 (33)"},
             toggles: [["Ud","autorw"]],
-            effectDescription() {return "Autoclick 'Max All' deadly mutation buyables, keep 28th and 30th UD milestones. UnBoosted Virus effect dilation+0.2 at "+format(1e161)+" Total UnBoosted Viruses."},
+            effectDescription() {return "自动点击'全部最大'致命突变可购买项，保留第28个和第30个UD里程碑。在 "+format(1e161)+" 总未增强病毒时未增强病毒效果稀释+0.2。"},
             done() { return player.uv.virusTotal.gte(1e158) }
         },
         33: {
-            requirementDescription() {return format(1e165)+" Total UnBoosted Viruses (34)"},
+            requirementDescription() {return format(1e165)+" 总未增强病毒 (34)"},
             effect() {
                 let eff = Decimal.add(player.ct.resetTime/3,1).pow(0.4)
                 return eff
             },
-            effectDescription() {return "Reset time boosts UBV resets gain, unlock time setting in auto-reset, UBV effect dilation+0.2 at "+format("e2553700")+" CTNA, 'UnRetRNA' cooldown is "+formatTime(10.1)+".<br>Currently: "+format(tmp.uv.milestones[33].effect)+"x"},
+            effectDescription() {return "重置时间提升UBV重置获取，在自动重置中解锁时间设置，在 "+format("e2553700")+" CTNA 时UBV效果稀释+0.2，'UnRetRNA'冷却时间为 "+formatTime(10.1)+"。<br>当前："+format(tmp.uv.milestones[33].effect)+"x"},
             done() { return player.uv.virusTotal.gte(1e165) }
         },
         34: {
-            requirementDescription() {return format(202e200)+" Total UnBoosted Viruses (35)"},
-            effectDescription() {return "Start with 40 Deadly Mutations and 8 'Deadly Reward' buyables, double Deadlier Mutant gain."},
+            requirementDescription() {return format(202e200)+" 总未增强病毒 (35)"},
+            effectDescription() {return "以40个致命突变和8个'致命奖励'可购买项开始，双倍更致命突变体获取。"},
             done() { return player.uv.virusTotal.gte(202e200) }
         },
         35: {
-            requirementDescription() {return "1 Deadlier Mutant in "+formatTime(180)+" (36)"},
-            effectDescription() {return "Double Deadlier Mutant gain and triple it at "+format(1e210)+" total UnBoosted Viruses."},
+            requirementDescription() {return "在 "+formatTime(180)+" 内获得1个更致命突变体 (36)"},
+            effectDescription() {return "双倍更致命突变体获取，并在 "+format(1e210)+" 总未增强病毒时三倍。"},
             done() { return player.Ud.dmutants.gte(1) && player.ct.resetTime<=180 }
         },
         36: {
-            requirementDescription() {return format(1e220)+" Total UnBoosted Viruses (37)"},
-            effectDescription() {return "Start with 50 Deadly Mutations, 1st 34 and 41th UD milestones, and 9 'Deadly Reward' buyables, double 拉巴斯 and Deadlier Mutant gain and triple it at "+format(1e224)+" total UnBoosted Viruses."},
+            requirementDescription() {return format(1e220)+" 总未增强病毒 (37)"},
+            effectDescription() {return "以50个致命突变、前34个和第41个UD里程碑以及9个'致命奖励'可购买项开始，双倍拉巴斯和更致命突变体获取，并在 "+format(1e224)+" 总未增强病毒时三倍。"},
             done() { return player.uv.virusTotal.gte(1e220) }
         },
         37: {
-            requirementDescription() {return format(1e231)+" Total UnBoosted Viruses (38)"},
-            effectDescription() {return "Buy max Deadlier Mutant buyables, double 拉巴斯 and Deadlier Mutant gain and triple it at "+format(1e234)+" total UnBoosted Viruses."},
+            requirementDescription() {return format(1e231)+" 总未增强病毒 (38)"},
+            effectDescription() {return "最大购买更致命突变体可购买项，双倍拉巴斯和更致命突变体获取，并在 "+format(1e234)+" 总未增强病毒时三倍。"},
             done() { return player.uv.virusTotal.gte(1e231) }
         },
         38: {
-            requirementDescription() {return format(1e248)+" Total UnBoosted Viruses (39)"},
-            effectDescription() {return "'Max All' buys Deadlier Mutant buyables, Deadly Crow tick interval is halved and again at "+(format(1e264))+" total UnBoosted Viruses."},
+            requirementDescription() {return format(1e248)+" 总未增强病毒 (39)"},
+            effectDescription() {return "'全部最大'购买更致命突变体可购买项，致命乌鸦滴答间隔减半，并在 "+(format(1e264))+" 总未增强病毒时再次减半。"},
             done() { return player.uv.virusTotal.gte(1e248) }
         },
         39: {
-            requirementDescription() {return format(1e270)+" Total UnBoosted Viruses (40)"},
-            effectDescription() {return "Start with 100 Deadly Mutations and 10 'Deadly Reward' buyables."},
+            requirementDescription() {return format(1e270)+" 总未增强病毒 (40)"},
+            effectDescription() {return "以100个致命突变和10个'致命奖励'可购买项开始。"},
             done() { return player.uv.virusTotal.gte(1e270) }
         },
         40: {
-            requirementDescription() {return format(1e30)+" Deadly Crows in "+formatTime(600)+" (41)"},
-            effectDescription() {return "'Max All' buys 'Deadly Mutation' and 'Deadly Reward'."},
+            requirementDescription() {return "在 "+formatTime(600)+" 内获得 "+format(1e30)+" 只致命乌鸦 (41)"},
+            effectDescription() {return "'全部最大'购买'致命突变'和'致命奖励'。"},
             done() { return player.Ud.crows.gte(1e30) && player.ct.resetTime<=600 }
         },
         41: {
-            requirementDescription() {return format(1e279)+" Total UnBoosted Viruses (42)"},
-            effectDescription() {return "'Anti-Base Mult' base after 100 is raised to 5."},
+            requirementDescription() {return format(1e279)+" 总未增强病毒 (42)"},
+            effectDescription() {return "'反基础倍数'在100之后的基础提高到5。"},
             done() { return player.uv.virusTotal.gte(1e279) }
         },
         42: {
-            requirementDescription() {return format(1e291)+" Total UnBoosted Viruses (43)"},
-            effectDescription() {return "Social Distant UI Gain is 1.1x weaker, time speed*2.91, dilate 'AdBooster' to 1.1, raise 'AdVaxxed Boost' to 1.5. Raise Anti-Distance effects to 1.035 at "+distShort(3535e32*88e25)+" Anti-Distance."},
+            requirementDescription() {return format(1e291)+" 总未增强病毒 (43)"},
+            effectDescription() {return "社交遥远UI获取弱化1.1倍，时间速度*2.91，将'AdBooster'稀释到1.1，将'AdVaxxed Boost'提高到1.5。在 "+distShort(3535e32 * 88e25)+" 反距离时将反距离效果提高到1.035。"},
             done() { return player.uv.virusTotal.gte(1e291) }
         },
         43: {
-            requirementDescription() {return format(295e293)+" Total UnBoosted Viruses (44)"},
-            effectDescription() {return "Raise Anti-Distance effects to 1.0295."},
+            requirementDescription() {return format(295e293)+" 总未增强病毒 (44)"},
+            effectDescription() {return "将反距离效果提高到1.0295。"},
             done() { return player.uv.virusTotal.gte(295e293) }
         },
         44: {
-            requirementDescription() {return format("eeeee13115")+" Cases in 'Booster Vaccine' (45)"},
+            requirementDescription() {return format("eeeee13115")+" 个病例在'增强剂疫苗'中 (45)"},
             effect() {
                 let eff = slog(player.ct.bestCases.max(10)).div(6).max(1).log10().div(3).add(1).pow(2)
                 return eff
             },
-            effectDescription() {return "Best cases in 'Booster Vaccine' boost Anti-Distance effects. Reduce 'Anti-Booster Gain' cost exponent by 0.02/0.01/0.01 at "+format(1e302)+"/"+format("e312")+"/"+format("e329")+" total UnBoosted Viruses.<br>Currently: ^"+format(tmp.uv.milestones[44].effect)},
+            effectDescription() {return "'增强剂疫苗'中的最佳病例提升反距离效果。在 "+format(1e302)+"/"+format("e312")+"/"+format("e329")+" 总未增强病毒时，将'反增强剂获取'成本指数降低0.02/0.01/0.01。<br>当前：^"+format(tmp.uv.milestones[44].effect)},
             done() { return player.points.gte("eeeee13115") && inChallenge("ct",32) }
         },
         45: {
-            requirementDescription() {return format("e335")+" Total UnBoosted Viruses (46)"},
-            effectDescription() {return "Raise Anti-Distance effects to 1.00335 and multiply time speed by 3.35."},
+            requirementDescription() {return format("e335")+" 总未增强病毒 (46)"},
+            effectDescription() {return "将反距离效果提高到1.00335，并将时间速度乘以3.35。"},
             done() { return player.uv.virusTotal.gte("e335") }
         },
         46: {
-            requirementDescription() {return format("e353")+" Total UnBoosted Viruses (47)"},
-            effectDescription() {return "Raise Anti-Distance effects to 1.00353 and multiply time speed by 3.53."},
+            requirementDescription() {return format("e353")+" 总未增强病毒 (47)"},
+            effectDescription() {return "将反距离效果提高到1.00353，并将时间速度乘以3.53。"},
             done() { return player.uv.virusTotal.gte("e353") }
         },
         47: {
-            requirementDescription() {return format("e400")+" Total UnBoosted Viruses (48)"},
-            effectDescription() {return "Multiply AnTNA gain by 40."},
+            requirementDescription() {return format("e400")+" 总未增强病毒 (48)"},
+            effectDescription() {return "将AnTNA获取乘以40。"},
             done() { return player.uv.virusTotal.gte("e400") }
         },
         48: {
-            requirementDescription() {return format("415e413")+" Total UnBoosted Viruses (49)"},
-            effectDescription() {return "Multiply AnTNA gain by 4.15 and increase 'AnTNA Base' base by 0.0415."},
+            requirementDescription() {return format("415e413")+" 总未增强病毒 (49)"},
+            effectDescription() {return "将AnTNA获取乘以4.15，并将'AnTNA基础'基础增加0.0415。"},
             done() { return player.uv.virusTotal.gte("415e413") }
         },
         49: {
-            requirementDescription() {return format("e440")+" Total UnBoosted Viruses (50)"},
-            effectDescription() {return "Raise base 'Anti-Capped' CTNA slog to 1.2 and multiply AnTNA gain by 5."},
+            requirementDescription() {return format("e440")+" 总未增强病毒 (50)"},
+            effectDescription() {return "将基础'反上限'CTNA对数标度提高到1.2，并将AnTNA获取乘以5。"},
             done() { return player.uv.virusTotal.gte("e440") }
         },
         50: {
-            requirementDescription() {return format("455e453")+" Total UnBoosted Viruses (51)"},
-            effectDescription() {return "Reduce 'Antiest-Booster Gain' cost exponent by 0.05. Add 0.15 to 'AnTNA 9' exponent."},
+            requirementDescription() {return format("455e453")+" 总未增强病毒 (51)"},
+            effectDescription() {return "将'Antiest-Booster Gain'成本指数降低0.05。将'AnTNA 9'指数增加0.15。"},
             done() { return player.uv.virusTotal.gte("455e453") }
         },
-        51: {
-            requirementDescription() {return "200,000 Deadly CrowBirds in "+formatTime(888)+" (52)"},
+51: {
+            requirementDescription() {return "在 "+formatTime(888)+" 内获得200,000只致命乌鸦鸟 (52)"},
             toggles: [["Ud","autocrow"]],
-            effectDescription() {return "Autoclick 'Max All' Deadly Crow buyables and add 0.1 to 'AnTNA 9' exponent. Reduce 'Antiest-Booster Gain' cost exponent by 0.02 and multiply AnTNA gain by 5.2."},
+            effectDescription() {return "自动点击'全部最大'致命乌鸦可购买项，并为'AnTNA 9'指数增加0.1。将'Antiest-Booster Gain'成本指数降低0.02，并将AnTNA获取乘以5.2。"},
             done() { return player.Ud.crowBirds.gte(2e5) && player.ct.resetTime<=888 }
         },
         52: {
-            requirementDescription() {return format("e477")+" Total UnBoosted Viruses (53)"},
-            effectDescription() {return "Multiply Deadly Crow birth and death rate by 4.77. Add 0.05 to 'AnTNA 9' (and 'AnTNA 6' at "+format("481e479")+" Total UBV) exponent."},
+            requirementDescription() {return format("e477")+" 总未增强病毒 (53)"},
+            effectDescription() {return "将致命乌鸦的出生率和死亡率乘以4.77。为'AnTNA 9'指数增加0.05（并在达到 "+format("481e479")+" 总UBV时为'AnTNA 6'指数也增加0.05）。"},
             done() { return player.uv.virusTotal.gte("e477") }
         },
         53: {
-            requirementDescription() {return format("e488")+" Total UnBoosted Viruses (54)"},
-            effectDescription() {return "Add 0.25 to base AnTNA gain and 'AnTNA 2' exponent."},
+            requirementDescription() {return format("e488")+" 总未增强病毒 (54)"},
+            effectDescription() {return "为基础AnTNA获取和'AnTNA 2'指数增加0.25。"},
             done() { return player.uv.virusTotal.gte("e488") }
         },
         54: {
-            requirementDescription() {return format("e505")+" Total UnBoosted Viruses (55)"},
-            effectDescription() {return "Add 0.25 to base AnTNA gain and 'AnTNA 2' exponent. Multiply AnT-Black Hole mass gain by 5.05 (*5.14 at "+format("e514")+" Total UBV)."},
+            requirementDescription() {return format("e505")+" 总未增强病毒 (55)"},
+            effectDescription() {return "为基础AnTNA获取和'AnTNA 2'指数增加0.25。将AnT-黑洞质量获取乘以5.05（在达到 "+format("e514")+" 总UBV时再乘以5.14）。"},
             done() { return player.uv.virusTotal.gte("e505") }
         },
         55: {
-            requirementDescription() {return format("e545")+" Total UnBoosted Viruses (56)"},
-            effectDescription() {return "'Max All' buys 2nd row Deadly Crow buyables and add 0.005 to 'AnTNA 9' exponent. Multiply AnT-Black Hole mass gain by 10.96 and double Feed cooldown at "+format("e548")+" Total UBV."},
+            requirementDescription() {return format("e545")+" 总未增强病毒 (56)"},
+            effectDescription() {return "'全部最大'购买第二行致命乌鸦可购买项，并为'AnTNA 9'指数增加0.005。将AnT-黑洞质量获取乘以10.96，并在达到 "+format("e548")+" 总UBV时将喂养冷却时间加倍。"},
             done() { return player.uv.virusTotal.gte("e545") }
         },
         56: {
-            requirementDescription() {return format("e569")+" Total UnBoosted Viruses (57)"},
-            effectDescription() {return "Add 0.05 to 'CorVid Gain' exponent and again at "+format("e591")+" Total UBV."},
+            requirementDescription() {return format("e569")+" 总未增强病毒 (57)"},
+            effectDescription() {return "为'CorVid Gain'指数增加0.05，并在达到 "+format("e591")+" 总UBV时再次增加0.05。"},
             done() { return player.uv.virusTotal.gte("e569") }
         },
         57: {
-            requirementDescription() {return format("e600")+" Total UnBoosted Viruses (58)"},
-            effectDescription() {return "Add 1.5 to 'AnTNA 2' exponent. Raise 'AdBases' effect to 1.3 and base AnT-Black Hole mass gain in gravitons to 1.1."},
+            requirementDescription() {return format("e600")+" 总未增强病毒 (58)"},
+            effectDescription() {return "为'AnTNA 2'指数增加1.5。将'AdBases'效果提高到1.3，并将引力子中的基础AnT-黑洞质量获取提高到1.1。"},
             done() { return player.uv.virusTotal.gte("e600") }
         },
         58: {
-            requirementDescription() {return format("e629")+" Total UnBoosted Viruses (59)"},
-            effectDescription() {return "'Max All' buys 3rd row Deadly Crow buyables and add 0.005 to 'AnTNA 9' exponent. Add 0.03 to 'CorVid Gain' exponent."},
+            requirementDescription() {return format("e629")+" 总未增强病毒 (59)"},
+            effectDescription() {return "'全部最大'购买第三行致命乌鸦可购买项，并为'AnTNA 9'指数增加0.005。为'CorVid Gain'指数增加0.03。"},
             done() { return player.uv.virusTotal.gte("e629") }
         },
     },
@@ -6592,10 +6592,10 @@ addLayer("uv", {
         rows: 6,
         cols: 6,
         11: {
-            title: "Slog Booster",
-            description: "Multiply cases slog by 1.1 (2 in 'Booster Vaccine') per 未接种 Layer.",
+            title: "对数标度增强器",
+            description: "每个未接种层将病例对数标度乘以1.1（在'增强剂疫苗'挑战中为2）。",
             cost: new Decimal(1e190),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let b = 1.1
                 if (inChallenge("ct",32)) b = 2
@@ -6613,10 +6613,10 @@ addLayer("uv", {
             }
         },
         12: {
-            title: "UI Booster",
-            description: "Raise UI gain to 1.1 and multiply 'Inf. Mult.' base by 1.1 per UL, Autobuy AdVaccines.",
+            title: "UI增强器",
+            description: "每个UL将UI获取提高到1.1，并将'Inf. Mult.'基础乘以1.1，自动购买AdVaccines。",
             cost: new Decimal("e1730"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let b = 1.1
                 let eff = Decimal.pow(b,tmp.uv.effLayers)
@@ -6638,10 +6638,10 @@ addLayer("uv", {
             }
         },
         13: {
-            title: "Effect Booster",
-            description: "Raise UI effect to 1.01 (1.15 in 'Booster Vaccine') per 未接种 Layer.",
+            title: "效果增强器",
+            description: "每个未接种层将UI效果提高到1.01（在'增强剂疫苗'挑战中为1.15）。",
             cost: new Decimal("e101e3"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let b = 1.01
                 if (inChallenge("ct",32)) b = 1.15
@@ -6659,10 +6659,10 @@ addLayer("uv", {
             }
         },
         14: {
-            title: "Challenge Booster",
-            description: "Multiply eff. challenge completions by 1.1 per 未接种 Layer.",
+            title: "挑战增强器",
+            description: "每个未接种层将有效挑战完成次数乘以1.1。",
             cost: new Decimal("e633e3"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let b = 1.1
                 let eff = Decimal.pow(b,tmp.uv.effLayers)
@@ -6679,10 +6679,10 @@ addLayer("uv", {
             }
         },
         15: {
-            title: "Base Booster",
-            description: "Raise 'UI Gain' base to 1.2 (1.5 in 'Booster Vaccine') per 未接种 Layer.",
+            title: "基础增强器",
+            description: "每个未接种层将'UI Gain'基础提高到1.2（在'增强剂疫苗'挑战中为1.5）。",
             cost: new Decimal("e5542e3"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let b = 1.2
                 if (inChallenge("ct",32)) b = 1.5
@@ -6700,10 +6700,10 @@ addLayer("uv", {
             }
         },
         21: {
-            title: "Scaling Booster",
-            description: "'UI Gain' scalings start 1.1x later (1.5 in 'Booster Vaccine') per 未接种 Layer.",
+            title: "缩放增强器",
+            description: "每个未接种层让'UI Gain'的缩放开始时间晚1.1倍（在'增强剂疫苗'挑战中为1.5倍）。",
             cost: new Decimal("e725e5"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let b = 1.1
                 if (inChallenge("ct",32)) b = 1.5
@@ -6721,10 +6721,10 @@ addLayer("uv", {
             }
         },
         22: {
-            title: "Layer Booster",
-            description: "Adverse Vaxxers and cases in 'Booster Vaccine' add eff. 未接种 Layers.",
+            title: "层级增强器",
+            description: "不良接种者和'增强剂疫苗'中的病例数增加有效未接种层。",
             cost: new Decimal("e25e8"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let adv = player.ct.Advaxxers.max(10).log10().max(10).log10().pow(1.5)
                 let cas = slog(player.points.max(10)).pow(0.5)
@@ -6743,10 +6743,10 @@ addLayer("uv", {
             }
         },
         23: {
-            title: "Best Booster",
-            description: "Best cases in 'Booster Vaccine' add eff. 未接种 Layers.",
+            title: "最佳增强器",
+            description: "'增强剂疫苗'中的最佳病例数增加有效未接种层。",
             cost: new Decimal("e293e28"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let cas = slog(player.ct.bestCases.max(10)).pow(0.75)
                 let eff = cas.div(1.5).max(1).sub(1)
@@ -6763,10 +6763,10 @@ addLayer("uv", {
             }
         },
         24: {
-            title: "AntiLayer",
-            description: "Raise Anti-Booster gain to 1.002 per 未接种 Layer.",
+            title: "反层级",
+            description: "每个未接种层将反增强剂获取提高到1.002。",
             cost: new Decimal("ee6060"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let eff = Decimal.pow(1.002,tmp.uv.effLayers)
                 return eff
@@ -6782,10 +6782,10 @@ addLayer("uv", {
             }
         },
         25: {
-            title: "DistLayer",
-            description: "Divide distance by 1.01 per 未接种 Layer.",
+            title: "距离层级",
+            description: "每个未接种层将距离除以1.01。",
             cost: new Decimal("eee150"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let eff = Decimal.pow(1.01,tmp.uv.effLayers)
                 return eff
@@ -6800,11 +6800,11 @@ addLayer("uv", {
                 player.points = player.points.sub("eee150")
             }
         },
-        31: { // Somi, Chungha
-            title: "Time Booster",
-            description: "Multiply Time speed by 1.2 per 未接种 Layer.",
+        31: {
+            title: "时间增强器",
+            description: "每个未接种层将时间速度乘以1.2。",
             cost: new Decimal("eee982900"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let Somi = Decimal.pow(1.2,tmp.uv.effLayers)
                 return Somi
@@ -6820,10 +6820,10 @@ addLayer("uv", {
             }
         },
         32: {
-            title: "AnDister",
-            description: "Multiply Anti-Distance gain by 10 per 未接种 Layer after 6, Anti-Distance dilation+0.002.",
+            title: "反距离器",
+            description: "在6层之后，每个未接种层将反距离获取乘以10，反距离稀释+0.002。",
             cost: new Decimal("eee75e49"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let Chungha = Decimal.pow(10,tmp.uv.effLayers.sub(6))
                 if (hasUpgrade("uv",41)) Chungha = Chungha.pow(tmp.uv.upgrades[41].effect)
@@ -6840,10 +6840,10 @@ addLayer("uv", {
             }
         },
         33: {
-            title: "Quarantined Booster",
-            description: "Multiply Quarantined infecter start slog by 1.1 per 未接种 Layer after 6.",
+            title: "隔离增强器",
+            description: "在6层之后，每个未接种层将隔离感染者的起始对数标度乘以1.1。",
             cost: new Decimal("eeee182e3"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let Somi = Decimal.pow(1.1,tmp.uv.effLayers.sub(6))
                 return Somi
@@ -6859,10 +6859,10 @@ addLayer("uv", {
             }
         },
         34: {
-            title: "Divided Booster",
-            description: "Add 0.001 to 'Distance Divider' exponent per 未接种 Layer after 7.",
+            title: "分割增强器",
+            description: "在7层之后，每个未接种层为'距离除数'指数增加0.001。",
             cost: new Decimal("eeee1751e30"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let Chungha = tmp.uv.effLayers.sub(7).mul(0.001)
                 return Chungha
@@ -6878,10 +6878,10 @@ addLayer("uv", {
             }
         },
         35: {
-            title: "AnBooster",
-            description: "Raise Anti-Distance effects to 1.01 per 未接种 Layer after 10 and unlock a buyable.",
+            title: "反增强器",
+            description: "在10层之后，每个未接种层将反距离效果提高到1.01，并解锁一个可购买项。",
             cost: new Decimal("eeeee8461"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let Somi = Decimal.pow(1.01,tmp.uv.effLayers.sub(10))
                 return Somi
@@ -6897,10 +6897,10 @@ addLayer("uv", {
             }
         },
         41: {
-            title: "AnDisterer",
-            description: "Raise 'AnDister' to 1.2 per 未接种 Layer+10.",
+            title: "反距离器进阶版",
+            description: "每个未接种层+10将'AnDister'提高到1.2。",
             cost: new Decimal("eeeee2978297"),
-            currencyDisplayName: "cases in 'Booster Vaccine'",
+            currencyDisplayName: "'增强剂疫苗'中的病例数",
             effect(){
                 let Chungha = Decimal.pow(1.2,tmp.uv.effLayers.add(10))
                 return Chungha
@@ -6917,57 +6917,57 @@ addLayer("uv", {
         },
         51: {
             title: "UB1",
-            description: "Unlock 'Max All' severe symptoms, 'ttRNA' cost/10, MMNA gain*3.",
+            description: "解锁'全部最大'严重症状，'ttRNA'成本/10，MMNA获取*3。",
             cost: decimalOne,
-            currencyDisplayName: "UnBoosted Virus",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         52: {
             title: "UB2",
-            description() {return  "MMNA gain*2, limit*1.5, attempt amount*5. MMNA effect^1.5 at "+format(183e7)+" MMNA."},
+            description() {return  "MMNA获取*2，限制*1.5，尝试次数*5。在达到 "+format(183e7)+" MMNA时，MMNA效果^1.5。"},
             cost: decimalTwo,
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         53: {
             title: "UB3",
-            description() {return  "MMNA gain*2, limit*1.5, attempt amount*2."},
+            description() {return  "MMNA获取*2，限制*1.5，尝试次数*2。"},
             cost: decimalTen,
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         54: {
             title: "UB4",
-            description() {return  "MMNA effect^1.4."},
+            description() {return  "MMNA效果^1.4。"},
             cost: new Decimal(20),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         55: {
             title: "UB5",
-            description() {return  "MMNA gain, mRNA and tRNA attempt amount*3."},
+            description() {return  "MMNA获取，mRNA和tRNA尝试次数*3。"},
             cost: new Decimal(100),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         56: {
             title: "UB6",
-            description() {return  "UnBoosted Virus effect dilation+0.5."},
+            description() {return  "未增强病毒效果稀释+0.5。"},
             cost: new Decimal(200),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         61: {
             title: "UB7",
-            description() {return  "UnBoosted Virus resets boost UnBoosted Virus gain."},
+            description() {return  "未增强病毒重置提升未增强病毒获取。"},
             cost: new Decimal(2023),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -6980,9 +6980,9 @@ addLayer("uv", {
         },
         62: {
             title: "UB8",
-            description() {return  "MMNA boosts 未接种 tRNA effect."},
+            description() {return  "MMNA提升未接种tRNA效果。"},
             cost: new Decimal(1e4),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -6995,9 +6995,9 @@ addLayer("uv", {
         },
         63: {
             title: "UB9",
-            description() {return  "mRNA boosts 未接种 tRNA effect."},
+            description() {return  "mRNA提升未接种tRNA效果。"},
             cost: new Decimal(5e4),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7014,9 +7014,9 @@ addLayer("uv", {
         },
         64: {
             title: "UB10",
-            description() {return  "未接种 tRNA boosts 未接种 tRNA effect."},
+            description() {return  "未接种tRNA提升未接种tRNA效果。"},
             cost: new Decimal(15e5),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7031,9 +7031,9 @@ addLayer("uv", {
         },
         65: {
             title: "UB11",
-            description() {return  "Cases add to UnBoosted Virus effect exp, tRNA attempt amount*3."},
+            description() {return  "病例数增加未增强病毒效果指数，tRNA尝试次数*3。"},
             cost: new Decimal(3e6),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7048,9 +7048,9 @@ addLayer("uv", {
         },
         66: {
             title: "UB12",
-            description() {return  "UnBoosted Viruses boost base anti-distance gain, time speed*3."},
+            description() {return  "未增强病毒提升基础反距离获取，时间速度*3。"},
             cost: new Decimal(2e7),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7062,11 +7062,11 @@ addLayer("uv", {
                 return format(tmp.uv.upgrades[66].effect)+'x'
             },
         },
-        71: {
+71: {
             title: "UB13",
-            description() {return  shiftDown?"Effect: 10<sup>log10(UBV effect)<sup>0.4</sup>*"+format(tmp.uv.upgrades[71].exp)+"</sup>":"UnBoosted Viruses boost MMNA gain and limit (shift to see formula), tRNA attempt amount*3."},
+            description() {return  shiftDown?"效果：10<sup>log10(UBV效果)<sup>0.4</sup>*"+format(tmp.uv.upgrades[71].exp)+"</sup>":"未增强病毒提升MMNA获取和限制（按住Shift查看公式），tRNA尝试次数*3。"},
             cost: new Decimal(1e9),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             exp() {
@@ -7090,25 +7090,25 @@ addLayer("uv", {
         },
         72: {
             title: "UB14",
-            description() {return  "UnBoosted Virus effect dilation +0.2, MMNA and mutated rRNA gain*3, keep 3rd row tRNA upgs, US mile 24."},
+            description() {return  "未增强病毒效果稀释+0.2，MMNA和突变rRNA获取*3，保留第3行tRNA升级，US里程碑24。"},
             cost: new Decimal(5e10),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         73: {
             title: "UB15",
-            description() {return  "UnBoosted Virus effect dilation +0.2, mutated rRNA gain*3."},
+            description() {return  "未增强病毒效果稀释+0.2，突变rRNA获取*3。"},
             cost: new Decimal(2e11),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         74: {
             title: "UB16",
-            description() {return  "CRNA buyables boost CRNA gain at ^0.5 effect, CRNA exponent+0.5."},
+            description() {return  "CRNA可购买项以^0.5的效果提升CRNA获取，CRNA指数+0.5。"},
             cost: new Decimal(2e14),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7121,9 +7121,9 @@ addLayer("uv", {
         },
         75: {
             title: "UB17",
-            description() {return  "CRNA buyables boost CRNA gain after log at ^0.3 effect, keep 5th row US upgs, 4th row tRNA upgs, 1st 30 US miles."},
+            description() {return  "CRNA可购买项在对数后以^0.3的效果提升CRNA获取，保留第5行US升级、第4行tRNA升级、前30个US里程碑。"},
             cost: new Decimal(3e16),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7136,9 +7136,9 @@ addLayer("uv", {
         },
         76: {
             title: "UB18",
-            description() {return  "Mutated rRNA boosts base CRNA gain, UB13 exp*2, UBV effect dilation+0.3."},
+            description() {return  "突变rRNA提升基础CRNA获取，UB13指数*2，UBV效果稀释+0.3。"},
             cost: new Decimal(1e18),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7153,9 +7153,9 @@ addLayer("uv", {
         },
         81: { // Chungha = e3094937511
             title: "UB19",
-            description() {return  "Unlock auto-reset, double UnBoosted Virus gain per maxed autobuyer, UB13 exponent*2."},
+            description() {return  "解锁自动重置，每个最大化的自动购买器使未增强病毒获取翻倍，UB13指数*2。"},
             cost: new Decimal(1e19),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7172,9 +7172,9 @@ addLayer("uv", {
         },
         82: {
             title: "UB20",
-            description() {return  shiftDown?"Effect: 10<sup>log10(UBV effect)<sup>0.35</sup>*"+format(tmp.uv.upgrades[82].exp)+"-5</sup>":"UnBoosted Viruses boost base CRNA gain (shift to see formula)."},
+            description() {return  shiftDown?"效果：10<sup>log10(UBV效果)<sup>0.35</sup>*"+format(tmp.uv.upgrades[82].exp)+"-5</sup>":"未增强病毒提升基础CRNA获取（按住Shift查看公式）。"},
             cost: new Decimal(2e21),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             exp() {
@@ -7195,25 +7195,25 @@ addLayer("uv", {
         },
         83: {
             title: "UB21",
-            description() {return  "Keep 5th row tRNA upgs, 1st 40 and 57th US miles, unlock UBV buyables, unlock Max All rRNA buyables." },
+            description() {return  "保留第5行tRNA升级、前40个和第57个US里程碑，解锁UBV可购买项，解锁'全部最大'rRNA可购买项。" },
             cost: new Decimal(1e23),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         84: {
             title: "UB22",
-            description() {return  "UnBoosted Virus gain exponent+0.25." },
+            description() {return  "未增强病毒获取指数+0.25。" },
             cost: new Decimal(5e28),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         85: {
             title: "UB23",
-            description() {return  "Double UnBoosted Virus gain per US milestone after 59, UB13 exponent*1.5."},
+            description() {return  "第59个之后的每个US里程碑使未增强病毒获取翻倍，UB13指数*1.5。"},
             cost: new Decimal(1e34),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7227,9 +7227,9 @@ addLayer("uv", {
         },
         86: {
             title: "UB24",
-            description() {return  "<span style='font-size:9px'>UBVs make unv. sev. 2nd sc. later, UB13 exp*1.5, 'Unva"+colorText("span","#308030","xx")+"ed Severity'^10 at "+format("e135e12")+" unv. sev., UU mile 29 eff*2 at "+format("e169e12")+" unv. sev.</span>"},
+            description() {return  "<span style='font-size:9px'>UBV使未接种严重程度的第二个缩放出现得更晚，UB13指数*1.5，在"+format("e135e12")+"未接种严重程度时'Unva"+colorText("span","#308030","xx")+"ed Severity'^10，在"+format("e169e12")+"未接种严重程度时UU里程碑29效果*2。</span>"},
             cost: new Decimal(1e35),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7242,25 +7242,25 @@ addLayer("uv", {
         },
         91: {
             title: "UB25",
-            description() {return  "未接种 death gain*3, 'UnRetRNA' cooldown is "+formatTime(12.5)+"." },
+            description() {return  "未接种死亡获取*3，'UnRetRNA'冷却时间为 "+formatTime(12.5)+"。" },
             cost: new Decimal(1e41),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         92: {
             title: "UB26",
-            description() {return  "未接种 death gain*2, 'UnRetRNA' cooldown is "+formatTime(12)+"." },
+            description() {return  "未接种死亡获取*2，'UnRetRNA'冷却时间为 "+formatTime(12)+"。" },
             cost: new Decimal(5e42),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         93: {
             title: "UB27",
-            description() {return  shiftDown?"Effect: 10<sup>log10(UBV effect)<sup>0.3</sup>*"+format(tmp.uv.upgrades[93].exp)+"-7</sup>":"UnBoosted Viruses boost 未接种 death gain (shift to see formula), UBV effect dilation +0.1."},
+            description() {return  shiftDown?"效果：10<sup>log10(UBV效果)<sup>0.3</sup>*"+format(tmp.uv.upgrades[93].exp)+"-7</sup>":"未增强病毒提升未接种死亡获取（按住Shift查看公式），UBV效果稀释+0.1。"},
             cost: new Decimal(2e43),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             exp() {
@@ -7278,33 +7278,33 @@ addLayer("uv", {
         },
         94: {
             title: "UB28",
-            description() {return  "CTNA gain*3, UB20 exponent*3 at "+format(1e45)+" 未接种 deaths, 'UnRetRNA' cooldown is "+formatTime(11.5)+"." },
+            description() {return  "CTNA获取*3，在达到"+format(1e45)+"未接种死亡时UB20指数*3，'UnRetRNA'冷却时间为 "+formatTime(11.5)+"。" },
             cost: new Decimal(5e47),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         95: {
             title: "UB29",
-            description() {return  "CTNA gain*3, UB13 and UB20 exponent*5 at "+format(1e185)+" 未接种 deaths, 'UnRetRNA' cooldown is "+formatTime(11)+"." },
+            description() {return  "CTNA获取*3，在达到"+format(1e185)+"未接种死亡时UB13和UB20指数*5，'UnRetRNA'冷却时间为 "+formatTime(11)+"。" },
             cost: new Decimal(15e53),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         96: {
             title: "UB30",
-            description() {return  "CTNA gain and 'CRNA Exponent' base*3, UB13, UB20, and UD eff exp*5 at "+format(303e301)+" 未接种 deaths, 'UnRetRNA' cooldown is "+formatTime(10.8)+"." },
+            description() {return  "CTNA获取和'CRNA指数'基础*3，在达到"+format(303e301)+"未接种死亡时UB13、UB20和UD效果指数*5，'UnRetRNA'冷却时间为 "+formatTime(10.8)+"。" },
             cost: new Decimal(3e58),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         101: { //Somi
             title: "UB31",
-            description() {return  shiftDown?"Effect: 10<sup>log10(UBV effect)<sup>0.25</sup>*"+format(tmp.uv.upgrades[101].exp)+"-9</sup>":"UnBoosted Viruses boost CTNA gain (shift to see formula), 'UnRetRNA' cooldown is "+formatTime(10.6)+"."},
+            description() {return  shiftDown?"效果：10<sup>log10(UBV效果)<sup>0.25</sup>*"+format(tmp.uv.upgrades[101].exp)+"-9</sup>":"未增强病毒提升CTNA获取（按住Shift查看公式），'UnRetRNA'冷却时间为 "+formatTime(10.6)+"。"},
             cost: new Decimal(1e83),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             exp() {
@@ -7322,25 +7322,25 @@ addLayer("uv", {
         },
         102: { 
             title: "UB32",
-            description() {return  "Anti-Distance dilation+0.001 (+0.0005 at "+format(1e97)+" UBV), UBV effect dilation+0.1, 'UnRetRNA' cooldown is "+formatTime(10.5)+"."},
+            description() {return  "反距离稀释+0.001（在"+format(1e97)+" UBV时额外+0.0005），UBV效果稀释+0.1，'UnRetRNA'冷却时间为 "+formatTime(10.5)+"。"},
             cost: new Decimal(5e92),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         103: { 
             title: "UB33",
-            description() {return  "UBV effect dilation+0.15, 'UnRetRNA' cooldown is "+formatTime(10.4)+", keep UD milestone 25."},
+            description() {return  "UBV效果稀释+0.15，'UnRetRNA'冷却时间为 "+formatTime(10.4)+"，保留UD里程碑25。"},
             cost: new Decimal(4e114),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         104: { 
             title: "UB34",
-            description() {return  "UBV gain boosts UBV resets gain, UBV resets boost UBV eff exp, 'UnRetRNA' cooldown is "+formatTime(10.3)+"."},
+            description() {return  "UBV获取提升UBV重置获取，UBV重置提升UBV效果指数，'UnRetRNA'冷却时间为 "+formatTime(10.3)+"。"},
             cost: new Decimal(2e122),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7361,9 +7361,9 @@ addLayer("uv", {
         },
         105: { 
             title: "UB35",
-            description() {return  shiftDown?"Effect: 10<sup>log10(UBV effect)<sup>0.15</sup>*"+format(tmp.uv.upgrades[105].exp)+"-7</sup>":"UnBoosted Viruses boost Deadly Mutant gain (shift to see formula), 'UnRetRNA' cooldown is "+formatTime(10.2)+"."},
+            description() {return  shiftDown?"效果：10<sup>log10(UBV效果)<sup>0.15</sup>*"+format(tmp.uv.upgrades[105].exp)+"-7</sup>":"未增强病毒提升致命突变体获取（按住Shift查看公式），'UnRetRNA'冷却时间为 "+formatTime(10.2)+"。"},
             cost: new Decimal(1e141),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             exp() {
@@ -7382,17 +7382,17 @@ addLayer("uv", {
         },
         106: { 
             title: "UB36",
-            description() {return  "'UnRetRNA' cooldown is "+formatTime(10)+" (always active) and unlock 'Max All' deadly mutant buyables, UBV eff dil+0.5 at "+format("5e974")+" Deadly Mutants."},
+            description() {return  "'UnRetRNA'冷却时间为 "+formatTime(10)+"（始终激活）并解锁'全部最大'致命突变可购买项，在达到"+format("5e974")+"致命突变体时UBV效果稀释+0.5。"},
             cost: new Decimal(1e186),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         111: { 
             title: "UB37",
-            description() {return  shiftDown?"Effect: 10<sup>log10(UBV effect)<sup>0.125</sup>*"+format(tmp.uv.upgrades[111].exp)+"-9</sup>":"UnBoosted Viruses boost Deadlier Mutant gain (shift to see formula)."},
+            description() {return  shiftDown?"效果：10<sup>log10(UBV效果)<sup>0.125</sup>*"+format(tmp.uv.upgrades[111].exp)+"-9</sup>":"未增强病毒提升更致命突变体获取（按住Shift查看公式）。"},
             cost: new Decimal(214e212),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             exp() {
@@ -7412,9 +7412,9 @@ addLayer("uv", {
         },
         112: { 
             title: "UB38",
-            description() {return  shiftDown?"Effect: 10<sup>log10(UBV effect)<sup>0.11</sup>*"+format(tmp.uv.upgrades[112].exp)+"-6</sup>":"UnBoosted Viruses boost 拉巴斯 gain (shift to see formula) and unlock a buyable."},
+            description() {return  shiftDown?"效果：10<sup>log10(UBV效果)<sup>0.11</sup>*"+format(tmp.uv.upgrades[112].exp)+"-6</sup>":"未增强病毒提升拉巴斯获取（按住Shift查看公式）并解锁一个可购买项。"},
             cost: new Decimal(232e230),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             exp() {
@@ -7434,9 +7434,9 @@ addLayer("uv", {
         },
         113: { 
             title: "UB39",
-            description() {return  shiftDown?"Effect: 10<sup>log10(UBV effect)<sup>0.085</sup>*"+format(tmp.uv.upgrades[113].exp)+"-1</sup>":"UnBoosted Viruses boost Deadly Crow birth rate (shift to see formula)."},
+            description() {return  shiftDown?"效果：10<sup>log10(UBV效果)<sup>0.085</sup>*"+format(tmp.uv.upgrades[113].exp)+"-1</sup>":"未增强病毒提升致命乌鸦出生率（按住Shift查看公式）。"},
             cost: new Decimal(1e256),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             exp() {
@@ -7455,9 +7455,9 @@ addLayer("uv", {
         },
         114: { 
             title: "UB40",
-            description() {return shiftDown?"Anti-Distance buyables (Row 3) softcap at 1,000: x → (log10(x)+7)<sup>3</sup>":"Anti-Distancing buyables after 7,000 multiply 'Boosterain' effective buyable amount by 1.003."},
+            description() {return shiftDown?"反距离可购买项（第3行）在1,000时软上限：x → (log10(x)+7)<sup>3</sup>":"超过7,000的反距离可购买项将'Boosterain'有效可购买数量乘以1.003。"},
             cost: new Decimal(1e285),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7478,9 +7478,9 @@ addLayer("uv", {
         },
         115: { 
             title: "UB41",
-            description() {return "<span style='font-size:9px'>Longest Adverse 接种者 reset time boosts UBV gain base (starts at "+formatTimeLong(1e60)+"), time speed*3.16, and unlock a buyable.</span>"},
+            description() {return "<span style='font-size:9px'>最长不良接种者重置时间提升UBV获取基础（从"+formatTimeLong(1e60)+"开始），时间速度*3.16，并解锁一个可购买项。</span>"},
             cost: new Decimal("e316.5"),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7495,9 +7495,9 @@ addLayer("uv", {
         },
         116: { 
             title: "UB42",
-            description() {return "Deadly Crows divide their interval."},
+            description() {return "致命乌鸦缩短它们的间隔。"},
             cost: new Decimal("339e337"),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7510,9 +7510,9 @@ addLayer("uv", {
         },
         121: { 
             title: "UB43",
-            description() {return "Bought Deadly Crows after 30 divide their interval."},
+            description() {return "购买的致命乌鸦在30个之后缩短它们的间隔。"},
             cost: new Decimal("e357"),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7525,9 +7525,9 @@ addLayer("uv", {
         },
         122: { 
             title: "UB44",
-            description() {return  shiftDown?"Effect: (UBV / "+format("e380")+")<sup>0.05</sup> + 1":"UnBoosted Viruses boost AnTNA gain (shift to see formula)."},
+            description() {return  shiftDown?"效果：(UBV / "+format("e380")+")<sup>0.05</sup> + 1":"未增强病毒提升AnTNA获取（按住Shift查看公式）。"},
             cost: new Decimal("382e380"),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7540,9 +7540,9 @@ addLayer("uv", {
         },
         123: { 
             title: "UB45",
-            description() {return "Deadly CrowBirds divide Deadly Crow interval."},
+            description() {return "致命乌鸦鸟缩短致命乌鸦的间隔。"},
             cost: new Decimal("e422"),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7555,9 +7555,9 @@ addLayer("uv", {
         },
         124: { 
             title: "UB46",
-            description() {return "Autobuyer interval limit is "+formatTime(0.01)+". Autobuyer interval below "+formatTime(0.1)+" boosts UBV gain base."},
+            description() {return "自动购买器间隔限制为 "+formatTime(0.01)+"。低于 "+formatTime(0.1)+" 的自动购买器间隔提升UBV获取基础。"},
             cost: new Decimal("e441"),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
@@ -7573,30 +7573,30 @@ addLayer("uv", {
         },
         125: { 
             title: "UB47",
-            description() {return "Double DC birth and death rate and again at "+format("468e466")+" total UBV. Add 0.05 to 'UnBoosted Layer' base and 'AnTNA 9' exponent."},
+            description() {return "DC出生率和死亡率翻倍，并在达到"+format("468e466")+"总UBV时再次翻倍。为'未接种层'基础和'AnTNA 9'指数增加0.05。"},
             cost: new Decimal("467e465"),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
         126: { 
             title: "UB48",
-            description() {return "Add 0.1 to 'UnBoosted Base' base. Divide Deadly CrowBird interval by 1.5."},
+            description() {return "为'未接种基础'基础增加0.1。将致命乌鸦鸟的间隔除以1.5。"},
             cost: new Decimal("e479"),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
-        131: {//Hyojung, Mimi, YooA, Seunghee, Yubin, Arin
+       131: {//孝定, Mimi, YooA, 胜熙, Yubin, Arin
             title: "UB49",
-            description() {return shiftDown?"Effect: 10<sup>log10(AnTNA / "+format("e525")+" + 1)<sup>0.65</sup> * 0.08</sup>":"UnBoosted Viruses boost AnT-Black Hole mass gain (shift to see formula)."},
+            description() {return shiftDown?"效果：10<sup>log10(AnTNA / "+format("e525")+" + 1)<sup>0.65</sup> * 0.08</sup>":"未增强病毒提升AnT-黑洞质量获取（按住Shift查看公式）。"},
             cost: new Decimal("e539"),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             effect(){
-                let Hyojung = powExp(player.uv.virus.div("e525").add(1),0.65).pow(0.07)
-                return Hyojung
+                let a = powExp(player.uv.virus.div("e525").add(1),0.65).pow(0.07)
+                return a
             },
             effectDisplay(){
                 return format(tmp.uv.upgrades[131].effect)+"x"
@@ -7604,9 +7604,9 @@ addLayer("uv", {
         },
         132: { 
             title: "UB50",
-            description() {return  shiftDown?"Effect: 10<sup>log10(UBV effect)<sup>0.05</sup>*"+format(tmp.uv.upgrades[112].exp)+"-1</sup>":"UnBoosted Viruses boost CorVid gain (shift to see formula)."},
+            description() {return  shiftDown?"效果：10<sup>log10(UBV效果)<sup>0.05</sup>*"+format(tmp.uv.upgrades[112].exp)+"-1</sup>":"未增强病毒提升CorVid获取（按住Shift查看公式）。"},
             cost: new Decimal("e574"),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
             exp() {
@@ -7624,9 +7624,9 @@ addLayer("uv", {
         },
         133: { 
             title: "UB51",
-            description() {return "Add 0.02 to 'CorVid Gain' exponent."},
+            description() {return "为'CorVid Gain'指数增加0.02。"},
             cost: new Decimal("e646"),
-            currencyDisplayName: "UnBoosted Viruses",
+            currencyDisplayName: "未增强病毒",
             currencyInternalName: "virus",
             currencyLayer: "uv",
         },
@@ -7636,7 +7636,7 @@ addLayer("uv", {
         cols: 2,
         11: {
             display() {
-                return "<h2>Switch to Normal Layers</h2>"
+                return "<h2>切换到普通层</h2>"
             },
             canClick() {return true},
             unlocked() { return inChallenge("ct",32) }, 
@@ -7646,7 +7646,7 @@ addLayer("uv", {
         },
         12: {
             display() {
-                return "<h2>Switch to 未接种 Layers</h2>"
+                return "<h2>切换到未接种层</h2>"
             },
             canClick() {return true},
             unlocked() { return inChallenge("ct",32) }, 
@@ -7656,7 +7656,7 @@ addLayer("uv", {
         },
         21: {
             display() {
-                return "<h2>Unlock UnBoosted Viruses</h2><br>Requires: "+format(tet10(5))+" cases"
+                return "<h2>解锁未增强病毒</h2><br>需要："+format(tet10(5))+" 个病例"
             },
             canClick() {return inChallenge("ct",32) && player.points.gte(tet10(5)) && !player.uv.uvUnlocked},
             unlocked() { return inChallenge("ct",32) && player.uv.points.gte(6) && !player.uv.uvUnlocked }, 
@@ -7672,13 +7672,13 @@ addLayer("uv", {
                 let time = player.ct.resetTime
                 let gainps = Decimal.div(gain,time)
                 let reset = ""
-                if (hasUpgrade("uv",104)) reset = " and "+formatWhole(resetgain)+pluralize(resetgain,' reset',' resets',true)
-                let dis = "Reset 'Booster Vaccine' for <h3>"+formatWhole(gain)+"</h3> UnBoosted "+pluralize(gain,'Virus','Viruses',true)+reset+"<br><br>"
-                if (gain.lt(1e6)) dis += "Next at " + format(next) + " cases<br>"
-                if (gainps.lt(1/60)) dis += format(gainps.mul(3600)) + "/hr"
-                else if (gainps.lt(1)) dis += format(gainps.mul(60)) + "/min"
-                else dis += format(gainps) + "/s"
-                //dis += "<br>" + format(resetgain.div(time)) +" resets/s"
+                if (hasUpgrade("uv",104)) reset = " 和 "+formatWhole(resetgain)+pluralize(resetgain,' 次重置',' 次重置',true)
+                let dis = "重置'增强剂疫苗'以获得 <h3>"+formatWhole(gain)+"</h3> 未增强 "+pluralize(gain,'病毒','病毒',true)+reset+"<br><br>"
+                if (gain.lt(1e6)) dis += "下一个在 " + format(next) + " 个病例时<br>"
+                if (gainps.lt(1/60)) dis += format(gainps.mul(3600)) + "/小时"
+                else if (gainps.lt(1)) dis += format(gainps.mul(60)) + "/分钟"
+                else dis += format(gainps) + "/秒"
+                //dis += "<br>" + format(resetgain.div(time)) +" 次重置/秒"
                 return dis
             },
             resetgain() {
@@ -7772,12 +7772,12 @@ addLayer("uv", {
         },
         32: {
             display() {
-                return "<h2>Reset 'Booster Vaccine'<br>"
+                return "<h2>重置'增强剂疫苗'<br>"
             },
             canClick() {return true},
             unlocked() { return player.uv.uvUnlocked && inChallenge("ct",32)}, 
             onClick() {
-                if (!confirm("Are you sure you want to do this? You will lose all your progress in 'Booster Vaccine'!")) return
+                if (!confirm("你确定要这样做吗？你将失去在'增强剂疫苗'中的所有进度！")) return
                 player.uv.mutPercent = player.Us.mutPercent
                 player.uv.mutPer = player.Us.mutPer
                 player.uv.tmutPercent = player.Us.tmutPercent
@@ -7803,7 +7803,7 @@ addLayer("uv", {
         },
         41: {
             display() {
-                return "<h3>Auto-Reset for UnBoosted Viruses</h3><br>"+(player.uv.autoreset?"ON":"OFF")+"<br></h2>"+formatTime(player.uv.cool)
+                return "<h3>自动重置以获取未增强病毒</h3><br>"+(player.uv.autoreset?"开启":"关闭")+"<br></h2>"+formatTime(player.uv.cool)
             },
             canClick() {return true},
             onClick() {
@@ -7814,8 +7814,8 @@ addLayer("uv", {
         },
         42: {
             display() {
-                let x = ["AMOUNT", "TIME"]
-                return "<h3>Auto-Reset setting: "+x[player.uv.autosetting%x.length]+"</h3><br>"
+                let x = ["数量", "时间"]
+                return "<h3>自动重置设置："+x[player.uv.autosetting%x.length]+"</h3><br>"
             },
             canClick() {return true},
             onClick() {
@@ -7825,7 +7825,7 @@ addLayer("uv", {
             style: {'height':'100px', 'min-height':'100px', 'width':'100px'},
         },
     },
-    buyables:{
+     buyables:{
         11: {
             title: "未接种 Layer",
             cost() { // cost for buying xth buyable, can be an object if there are multiple currencies
@@ -7909,7 +7909,7 @@ addLayer("uv", {
                 return Decimal.pow(0.7, x).mul(10).max(0.1).mul(Decimal.pow(0.9, x.sub(13).max(0))).max(i);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "UnBoosted Viruses") return
+               
                 let extra = ""
                 let dis = "Reduce 'Max All' severe symptoms cooldown by "+(player.uv.buyables[this.id].gte(13)?"10":"30")+"%"
                 let i = tmp.uv.buyables[21].int
@@ -7977,7 +7977,7 @@ addLayer("uv", {
                 return Decimal.pow(0.7, x).mul(15).max(0.1).mul(Decimal.pow(0.9, x.sub(15).max(0))).max(i);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "UnBoosted Viruses") return
+             
                 let extra = ""
                 let dis = "Reduce 'Max All' 未接种 tRNA buyables cooldown by "+(player.uv.buyables[this.id].gte(15)?"10":"30")+"%"
                 let i = tmp.uv.buyables[22].int
@@ -8045,7 +8045,7 @@ addLayer("uv", {
                 return Decimal.pow(0.7, x).mul(60).max(0.1).mul(Decimal.pow(0.9, x.sub(18).max(0))).max(i);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "UnBoosted Viruses") return
+             
                 let extra = ""
                 let dis = "Reduce US upgrade autobuyer cooldown by "+(player.uv.buyables[this.id].gte(18)?"10":"30")+"%"
                 let i = tmp.uv.buyables[23].int
@@ -8113,7 +8113,7 @@ addLayer("uv", {
                 return Decimal.pow(0.7, x).mul(60).max(0.1).mul(Decimal.pow(0.9, x.sub(18).max(0))).max(i);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "UnBoosted Viruses") return
+             
                 let extra = ""
                 let dis = "Reduce mRNA mutation autobuyer cooldown by "+(player.uv.buyables[this.id].gte(18)?"10":"30")+"%"
                 let i = tmp.uv.buyables[31].int
@@ -8181,7 +8181,7 @@ addLayer("uv", {
                 return Decimal.pow(0.7, x).mul(60).max(0.1).mul(Decimal.pow(0.9, x.sub(18).max(0))).max(i);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "UnBoosted Viruses") return
+             
                 let extra = ""
                 let dis = "Reduce tRNA mutation autobuyer cooldown by "+(player.uv.buyables[this.id].gte(18)?"10":"30")+"%"
                 let i = tmp.uv.buyables[32].int
@@ -8249,7 +8249,7 @@ addLayer("uv", {
                 return Decimal.pow(0.7, x).mul(60).max(0.1).mul(Decimal.pow(0.9, x.sub(18).max(0))).max(i);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "UnBoosted Viruses") return
+             
                 let extra = ""
                 let dis = "Reduce auto-reset cooldown by "+(player.uv.buyables[this.id].gte(18)?"10":"30")+"%"
                 let i = tmp.uv.buyables[33].int
@@ -8317,7 +8317,7 @@ addLayer("uv", {
                 return Decimal.pow(0.7, x).mul(30).max(0.1).mul(Decimal.pow(0.9, x.sub(16).max(0))).max(i);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "UnBoosted Viruses") return
+             
                 let extra = ""
                 let dis = "Reduce 'Max All' mutated rRNA buyables cooldown by "+(player.uv.buyables[this.id].gte(16)?"10":"30")+"%"
                 let i = tmp.uv.buyables[41].int
@@ -8385,7 +8385,7 @@ addLayer("uv", {
                 return Decimal.pow(0.7, x).mul(30).max(0.1).mul(Decimal.pow(0.9, x.sub(16).max(0))).max(i);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "UnBoosted Viruses") return
+             
                 let extra = ""
                 let dis = "Reduce 'Max All' 未接种 death buyables cooldown by "+(player.uv.buyables[this.id].gte(16)?"10":"30")+"%"
                 let i = tmp.uv.buyables[42].int
@@ -8453,7 +8453,7 @@ addLayer("uv", {
                 return Decimal.pow(0.7, x).mul(60).max(0.1).mul(Decimal.pow(0.9, x.sub(18).max(0))).max(i);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "UnBoosted Viruses") return
+             
                 let extra = ""
                 let dis = "Reduce UD upgrade autobuyer cooldown by "+(player.uv.buyables[this.id].gte(18)?"10":"30")+"%"
                 let i = tmp.uv.buyables[43].int
@@ -8521,7 +8521,7 @@ addLayer("uv", {
                 return Decimal.pow(0.7, x).mul(60).max(0.1).mul(Decimal.pow(0.9, x.sub(18).max(0))).max(i);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "UnBoosted Viruses") return
+             
                 let extra = ""
                 let dis = "Reduce 'Max All' deadly mutation buyables cooldown by "+(player.uv.buyables[this.id].gte(18)?"10":"30")+"%"
                 let i = tmp.uv.buyables[51].int
@@ -8589,7 +8589,7 @@ addLayer("uv", {
                 return Decimal.pow(0.7, x).mul(60).max(0.1).mul(Decimal.pow(0.9, x.sub(18).max(0))).max(i);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "UnBoosted Viruses") return
+             
                 let extra = ""
                 let dis = "Reduce 'Max All' deadly mutant buyables cooldown by "+(player.uv.buyables[this.id].gte(18)?"10":"30")+"%"
                 let i = tmp.uv.buyables[52].int
@@ -8655,7 +8655,7 @@ addLayer("uv", {
                 return Decimal.pow(0.7, x).mul(60).max(0.1).mul(Decimal.pow(0.9, x.sub(18).max(0))).max(i);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "UnBoosted Viruses") return
+             
                 let extra = ""
                 let dis = "Reduce 'Max All' deadly crow buyables cooldown by "+(player.uv.buyables[this.id].gte(18)?"10":"30")+"%"
                 let i = tmp.uv.buyables[53].int
@@ -8716,7 +8716,7 @@ addLayer("uv", {
                 return Decimal.pow(base, x);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "Buyables") return
+                
                 let extra = ""
                 let dis = "Multiply UnBoosted Virus gain by " + format(tmp[this.layer].buyables[this.id].base)
                 return dis + ".\n\
@@ -8777,7 +8777,7 @@ addLayer("uv", {
                 return Decimal.mul(base, x);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "Buyables") return
+                
                 let extra = ""
                 let dis = "Increase UnBoosted Virus effect dilation by " + format(tmp[this.layer].buyables[this.id].base)
                 return dis + ".\n\
@@ -8838,7 +8838,7 @@ addLayer("uv", {
                 return Decimal.mul(base, x);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "Buyables") return
+                
                 let extra = ""
                 let dis = "Increase effective 未接种 Layers by " + format(tmp[this.layer].buyables[this.id].base)
                 return dis + ".\n\
@@ -8908,7 +8908,7 @@ addLayer("uv", {
                 return Decimal.pow(base, x);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "uv" || player.subtabs.uv.mainTabs != "Buyables") return
+                
                 let extra = ""
                 let dis = "Increase 'UnBoosted Virus Multiplier' base by " + format(tmp[this.layer].buyables[this.id].base) + " and multiply UnBoosted Virus gain base by " + format(tmp[this.layer].buyables[this.id].base2)
                 return dis + ".\n\
@@ -9411,8 +9411,8 @@ addLayer("f", {
         return scale
     },
     effectDescription() {
-        return "which boosts cases, VP, infectivity, severity by " + layerText("h2", "f", format(this.effect())) + ", and death gain by " +layerText("h2", "f", format(this.effect2())) + " (based on best)."
-    },
+    return "这提升病例、病毒点数、传染性、严重性 " + layerText("h2", "f", format(this.effect())) + "，并提升死亡获取 " + layerText("h2", "f", format(this.effect2())) + "（基于最佳值）。"
+},
     tabFormat: {
         "Milestones": {
             content: [
@@ -45169,7 +45169,7 @@ addLayer("Uv", {
                 return Decimal.pow(base, x);
             },
             display() { // Everything else displayed in the buyable button after the title
-                if (player.tab != "Uv" || player.subtabs.Uv.mainTabs != "Buyables") return
+                
                 let extra = ""
                 let dis = "Multiply cases gain after slog by "+format(tmp.Uv.buyables[11].base)
                 return dis + ".\n\
@@ -45239,7 +45239,7 @@ addLayer("Uv", {
             return Decimal.pow(base, x);
         },
         display() { // Everything else displayed in the buyable button after the title
-            if (player.tab != "Uv" || player.subtabs.Uv.mainTabs != "Buyables") return
+            
             let extra = ""
             let dis = "Multiply infectivity and 未接种 virus gain by "+format(tmp.Uv.buyables[12].base)
             return dis + ".\n\

@@ -532,7 +532,7 @@ var cnItems = {
     '\'Disease\' boosts \'Infection\' after softcap.': '基于"疾病"在软上限之后加成"感染"',
     'Add 0.025 to \'Disease Gain\' base.': '"疾病获取"的基础增加0.025',
     'Cases boost base infectious disease gain.': '基于病例加成基础感染性疾病获取',
-    'Cases boost IP and ID effect exponent and unlock a row of IP upgrades.': '病例加成感染力量和感染疾病效果指数并酒叟一排感染力量升级',
+    'Cases boost IP and ID effect exponent and unlock a row of IP upgrades.': '病例加成感染力量和感染疾病效果指数并解锁一排感染力量升级',
     'Cases slow interval scaling.': '基于病例延缓传染膨胀',
     'Casual viruses boost infection power gain.': '基于受害病毒加成感染力量获取',
     'Fatality boosts infectious disease effect and dimension autobuyers buy max.': '基于致死性加成感染性疾病效果且维度自动购买最大',

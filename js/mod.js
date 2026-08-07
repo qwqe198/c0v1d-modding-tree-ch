@@ -17,256 +17,256 @@ let VERSION = {
 	name: "Vorona Cirus AnT-CTNA",
 }
 
-let changelog = `<h1>Changelog:</h1><br>
+let changelog = `<h1>更新日志：</h1><br>
         <h3>v0.6.25</h3><br>
-        - Added AnTNA<br>
-        - Added 9 CTNA milestones<br>
-        - Added 11 UnBoosted Virus upgrades<br>
-        - Added 15 UnBoosted Virus milestones<br>
-        - Added an UnBoosted Virus buyable<br>
-        - Added 3 Booster upgrades<br>
-        - Added an 未接种 Layer upgrade<br>
-        - Added 6 Anti-Distancing upgrades<br>
-        - Added 6 Achievements<br>
+        - 添加了 AnTNA<br>
+        - 添加了 9 个 CTNA 里程碑<br>
+        - 添加了 11 个未增强病毒升级<br>
+        - 添加了 15 个未增强病毒里程碑<br>
+        - 添加了一个未增强病毒可购买项<br>
+        - 添加了 3 个增强剂升级<br>
+        - 添加了一个未接种层升级<br>
+        - 添加了 6 个反距离升级<br>
+        - 添加了 6 个成就<br>
         v0.6.24.1<br>
-        - Fixed T hotkey resetting for CTNA in 'Booster Vaccine' and getting kicked out of the challenge.<br>
+        - 修复了 T 热键在"增强剂疫苗"中重置 CTNA 并被踢出挑战的问题。<br>
         <h3>v0.6.24</h3><br>
-        - Added Deadly Crows<br>
-        - Added 5 UnBoosted Virus upgrades<br>
-        - Added 11 UnBoosted Virus milestones<br>
-        - Added 2 UnBoosted Virus buyables<br>
-        - Added a Booster upgrade<br>
-        - Added 2 未接种 Layer upgrades<br>
-        - Added 2 Anti-Distancing upgrades<br>
-        - Added 5 Achievements<br>
+        - 添加了致命乌鸦<br>
+        - 添加了 5 个未增强病毒升级<br>
+        - 添加了 11 个未增强病毒里程碑<br>
+        - 添加了 2 个未增强病毒可购买项<br>
+        - 添加了一个增强剂升级<br>
+        - 添加了 2 个未接种层升级<br>
+        - 添加了 2 个反距离升级<br>
+        - 添加了 5 个成就<br>
         <h3>v0.6.23</h3><br>
-        - Added Deadly Mutations<br>
-        - Added 5 UnBoosted Virus upgrades<br>
-        - Added 7 UnBoosted Virus milestones<br>
-        - Added a Booster upgrade<br>
-        - Added an 未接种 Layer upgrade<br>
-        - Added 5 Anti-Distancing upgrades<br>
-        - Added 5 Achievements<br>
+        - 添加了致命突变<br>
+        - 添加了 5 个未增强病毒升级<br>
+        - 添加了 7 个未增强病毒里程碑<br>
+        - 添加了一个增强剂升级<br>
+        - 添加了一个未接种层升级<br>
+        - 添加了 5 个反距离升级<br>
+        - 添加了 5 个成就<br>
         <h3>v0.6.22</h3><br>
-        - Added an 未接种 Layer<br>
-        - Added 6 UnBoosted Virus upgrades<br>
-        - Added 3 UnBoosted Virus milestones<br>
-        - Added a Booster upgrade<br>
-        - Added an Anti-Distancing upgrade<br>
-        - Added 3 Achievements<br>
+        - 添加了一个未接种层<br>
+        - 添加了 6 个未增强病毒升级<br>
+        - 添加了 3 个未增强病毒里程碑<br>
+        - 添加了一个增强剂升级<br>
+        - 添加了一个反距离升级<br>
+        - 添加了 3 个成就<br>
         v0.6.21.1<br>
-        - Fixed Corona Mutation 9+ cost<br>
+        - 修复了冠状病毒突变 9+ 的成本<br>
         <h3>v0.6.21</h3><br>
-        - Added mutated rRNA<br>
-        - Added 12 UnBoosted Virus upgrades<br>
-        - Added an 未接种 Layer upgrade<br>
-        - Added a Booster upgrade<br>
-        - Added 4 Anti-Distancing upgrades<br>
-        - Added 4 Achievements<br>
-        - Changed SARS Mutation names.<br>
+        - 添加了突变的 rRNA<br>
+        - 添加了 12 个未增强病毒升级<br>
+        - 添加了一个未接种层升级<br>
+        - 添加了一个增强剂升级<br>
+        - 添加了 4 个反距离升级<br>
+        - 添加了 4 个成就<br>
+        - 更改了 SARS 突变名称。<br>
         <h3>v0.6.20</h3><br>
-        - Added UnBoosted Viruses<br>
-        - Added an 未接种 Layer upgrade<br>
-        - Added 2 Booster upgrades<br>
-        - Added 6 Anti-Distancing upgrades<br>
-        - Added 4 Achievements<br>
-        - Fixed quarantine UC gain exponent applied 2x bug.<br>
+        - 添加了未增强病毒<br>
+        - 添加了一个未接种层升级<br>
+        - 添加了 2 个增强剂升级<br>
+        - 添加了 6 个反距离升级<br>
+        - 添加了 4 个成就<br>
+        - 修复了隔离 UC 获取指数应用两次的错误。<br>
         v0.6.19.1<br>
-        - Added upgrade '73' softcap at 1 hour reset time<br>
-        - Fixed AdChallenges NaN bug<br>
+        - 在 1 小时重置时间处为升级 '73' 添加了软上限<br>
+        - 修复了 AdChallenges NaN 错误<br>
         <h3>v0.6.19</h3><br>
-        - Added an 未接种 layer<br>
-        - Added an 未接种 layer upgrade<br>
-        - Added 2 Booster Upgrades<br>
-        - Added 10 Anti-Distancing Upgrades<br>
-        - Added 5 Achievements.<br>
-        - Fixed hotkeys reset for 未接种 layers without having it unlocked.<br>
-        - Fixed 'autosave is off' bug.<br>
+        - 添加了一个未接种层<br>
+        - 添加了一个未接种层升级<br>
+        - 添加了 2 个增强剂升级<br>
+        - 添加了 10 个反距离升级<br>
+        - 添加了 5 个成就。<br>
+        - 修复了未解锁未接种层时热键重置的问题。<br>
+        - 修复了"自动保存已关闭"错误。<br>
         v0.6.18.1<br>
-        - Added Anti-Distancing softcaps<br>
-        - Fixed 'Anti-Inactivated' achievement tooltip<br>
+        - 添加了反距离软上限<br>
+        - 修复了"抗灭活"成就提示<br>
         <h3>v0.6.18</h3><br>
-        - Added Anti-Distancing<br>
-        - Added 4 Booster Upgrades<br>
-        - Added an 未接种 layer Upgrade<br>
-        - Added 5 Anti-Booster Upgrades<br>
-        - Added 5 Achievements.<br>
+        - 添加了反距离<br>
+        - 添加了 4 个增强剂升级<br>
+        - 添加了一个未接种层升级<br>
+        - 添加了 5 个反增强剂升级<br>
+        - 添加了 5 个成就。<br>
         <h3>v0.6.17</h3><br>
-        - Added Notations<br>
-        - Added a Booster Upgrade<br>
-        - Added an 未接种 layer Upgrade<br>
-        - Added 3 Anti-Booster Upgrades<br>
-        - Added 4 Achievements.<br>
-        - Added a Layer.<br>
+        - 添加了符号表示法<br>
+        - 添加了一个增强剂升级<br>
+        - 添加了一个未接种层升级<br>
+        - 添加了 3 个反增强剂升级<br>
+        - 添加了 4 个成就。<br>
+        - 添加了一个层。<br>
         v0.6.16.1<br>
-        - Fixed cases gain too low bug in 'Booster Vaccine'<br>
+        - 修复了"增强剂疫苗"中病例获取过低的问题<br>
         <h3>v0.6.16</h3><br>
-        - Added 2 Booster Upgrades<br>
-        - Added 6 Anti-Booster Upgrades<br>
-        - Added 4 Achievements.<br>
-        - Added a Layer.<br>
+        - 添加了 2 个增强剂升级<br>
+        - 添加了 6 个反增强剂升级<br>
+        - 添加了 4 个成就。<br>
+        - 添加了一个层。<br>
         <h3>v0.6.15</h3><br>
-        - Added Anti-Boosters<br>
-        - Added 5 Achievements.<br>
-        - Added a Layer.<br>
-        - Added Singular/Plural words.<br>
+        - 添加了反增强剂<br>
+        - 添加了 5 个成就。<br>
+        - 添加了一个层。<br>
+        - 添加了单数/复数词语。<br>
         v0.6.14.1<br>
-        - Fixed 'You are past endgame' bug<br>
-        - Fixed 未接种 Layer upgrades that aren't tsupposed to be buyable out of 'Booster Vaccine'<br>
+        - 修复了"你已超出终局"错误<br>
+        - 修复了不应在"增强剂疫苗"外购买的未接种层升级<br>
         <h3>v0.6.14</h3><br>
-        - Added a Challenge.<br>
-        - Added a Buyable.<br>
-        - Added a Side Layer.<br>
-        - Added 2 Layers.<br>
-        - Added 3 Achievements.<br>
-        - Added Cases Representation (from NG+++).<br>
-        - Changed Anti-Roulette clickables.<br>
+        - 添加了一个挑战。<br>
+        - 添加了一个可购买项。<br>
+        - 添加了一个侧边层。<br>
+        - 添加了 2 个层。<br>
+        - 添加了 3 个成就。<br>
+        - 添加了病例表示（来自 NG+++）。<br>
+        - 更改了反轮盘可点击项。<br>
         v0.6.13.1<br>
-        - Fixed Green Lose Streak bug<br>
+        - 修复了绿色连败错误<br>
         <h3>v0.6.13</h3><br>
-        - Added AdVaccines.<br>
-        - Added Adverse Challenges.<br>
-        - Added 3 Anti-Roulette clickables.<br>
-        - Added 5 Achievements.<br>
-        - Added an Achievement Reward (Corona GAS).<br>
+        - 添加了 AdVaccines。<br>
+        - 添加了不良挑战。<br>
+        - 添加了 3 个反轮盘可点击项。<br>
+        - 添加了 5 个成就。<br>
+        - 添加了一个成就奖励（Corona GAS）。<br>
         <h3>v0.6.12</h3><br>
-        - Added Adverse Vaxxers.<br>
-        - Added 3 Adverse Vaccines.<br>
-        - Added 3 Achievements.<br>
+        - 添加了不良反疫苗者。<br>
+        - 添加了 3 个不良疫苗。<br>
+        - 添加了 3 个成就。<br>
         <h3>v0.6.11</h3><br>
-        - Added Adverse Vaccines.<br>
-        - Added 2 Vaccination upgrades.<br>
-        - Added 2 Achievements.<br>
+        - 添加了不良疫苗。<br>
+        - 添加了 2 个疫苗接种升级。<br>
+        - 添加了 2 个成就。<br>
         <h3>v0.6.10</h3><br>
-        - Added Vaccination.<br>
-        - Added an Adverse Effect upgrade.<br>
-        - Added 2 Achievements.<br>
+        - 添加了疫苗接种。<br>
+        - 添加了一个不良效果升级。<br>
+        - 添加了 2 个成就。<br>
         v0.6.9.2<br>
-        - Fixed replicator effect bug.<br>
+        - 修复了复制体效果错误。<br>
         v0.6.9.1<br>
-        - Fixed In'F'inite CASES Achievement bug.<br>
+        - 修复了 In'F'inite CASES 成就错误。<br>
         <h3>v0.6.9</h3><br>
-        - Added 6 Adverse Effect upgrades.<br>
-        - Added an Adverse Effect Buyable.<br>
-        - Added 2 Achievements.<br>
+        - 添加了 6 个不良效果升级。<br>
+        - 添加了一个不良效果可购买项。<br>
+        - 添加了 2 个成就。<br>
         <h3>v0.6.8</h3><br>
-        - Added Adversities.<br>
-        - Added 2 Adverse Effect Buyables.<br>
-        - Added 3 Achievements.<br>
+        - 添加了逆境。<br>
+        - 添加了 2 个不良效果可购买项。<br>
+        - 添加了 3 个成就。<br>
         v0.6.7.2<br>
-        - Added 2 Achievement Rewards.<br>
+        - 添加了 2 个成就奖励。<br>
         v0.6.7.1<br>
-        - Fixed Adverse buyable name and display.<br>
-        - Fixed Self Green and ExpoEffect upgrade display bug.<br>
+        - 修复了不良可购买项的名称和显示。<br>
+        - 修复了自我绿色和指数效果升级显示错误。<br>
         <h3>v0.6.7</h3><br>
-        - Added Adverse Effects.<br>
-        - Added 2 Anti-接种者 Buyables.<br>
-        - Added 3 Achievements.<br>
+        - 添加了不良效果。<br>
+        - 添加了 2 个反接种者可购买项。<br>
+        - 添加了 3 个成就。<br>
         <h3>v0.6.6</h3><br>
-        - Added Side Effects.<br>
-        - Added 4 Anti-接种者 Buyables.<br>
-        - Added 3 Achievements.<br>
-        - Fixed NaN casual bug.<br>
+        - 添加了副作用。<br>
+        - 添加了 4 个反接种者可购买项。<br>
+        - 添加了 3 个成就。<br>
+        - 修复了 NaN 随意错误。<br>
         <h3>v0.6.5</h3><br>
-        - Added Anti-Vaxxers.<br>
-        - Added an Anti-Masker buyable.<br>
-        - Added 3 Anti-Roulette Buyables.<br>
-        - Added 7 Achievements.<br>
-        - Added Update rate slider.<br>
+        - 添加了反疫苗者。<br>
+        - 添加了一个反口罩者可购买项。<br>
+        - 添加了 3 个反轮盘可购买项。<br>
+        - 添加了 7 个成就。<br>
+        - 添加了更新速率滑块。<br>
         <h3>v0.6.4</h3><br>
-        - Added Green Bets.<br>
-        - Added 4 Anti-Roulette Buyables.<br>
-        - Added 4 Achievements.<br>
-        - Changed Shift to Ctrl to pin tooltips.<br>
+        - 添加了绿色赌注。<br>
+        - 添加了 4 个反轮盘可购买项。<br>
+        - 添加了 4 个成就。<br>
+        - 将固定提示的按键从 Shift 改为 Ctrl。<br>
         <h3>v0.6.3</h3><br>
-        - Added Anti-Roulette.<br>
-        - Added 2 Anti-Masker Buyables.<br>
-        - Added 4 Achievements.<br>
+        - 添加了反轮盘。<br>
+        - 添加了 2 个反口罩者可购买项。<br>
+        - 添加了 4 个成就。<br>
         v0.6.2.1<br>
-        - Fixed News ticker bug.<br>
-        - Fixed OOM/s bug.<br>
-        - Fixed Dimension cost bug.<br>
+        - 修复了新闻滚动条错误。<br>
+        - 修复了 OOM/s 错误。<br>
+        - 修复了维度成本错误。<br>
         <h3>v0.6.2</h3><br>
-        - Added Anti-Maskers.<br>
-        - Added 3 Buyables.<br>
-        - Added 2 Achievements.<br>
+        - 添加了反口罩者。<br>
+        - 添加了 3 个可购买项。<br>
+        - 添加了 2 个成就。<br>
         <h3>v0.6.1</h3><br>
-        - Added 5 Milestones.<br>
-        - Added 6 Buyables.<br>
-        - Added 4 Achievements.<br>
+        - 添加了 5 个里程碑。<br>
+        - 添加了 6 个可购买项。<br>
+        - 添加了 4 个成就。<br>
         <h2 style = color:#93d281;>v0.6</h2><br>
-        - Added CTNA.<br>
-        - Added 3 more mRNA upgrades.<br>
-        - Added 8 more Achievements.<br>
+        - 添加了 CTNA。<br>
+        - 添加了 3 个更多的 mRNA 升级。<br>
+        - 添加了 8 个更多的成就。<br>
         <h3>v0.5.7</h3><br>
-        - Added CRNA.<br>
-        - Added 4 Achievements.<br>
+        - 添加了 CRNA。<br>
+        - 添加了 4 个成就。<br>
         <h3>v0.5.6</h3><br>
-        - Added Corona Mutations.<br>
-        - Added 2 Achievements.<br>
+        - 添加了冠状病毒突变。<br>
+        - 添加了 2 个成就。<br>
         <h3>v0.5.5</h3><br>
-        - Added MMNA.<br>
-        - Added 2 Achievements.<br>
+        - 添加了 MMNA。<br>
+        - 添加了 2 个成就。<br>
         <h3>v0.5.4</h3><br>
-        - Added mRNA.<br>
-        - Added 3 Achievements.<br>
+        - 添加了 mRNA。<br>
+        - 添加了 3 个成就。<br>
         <h3>v0.5.3</h3><br>
-        - Added Molecules.<br>
-        - Added 3 Achievements.<br>
+        - 添加了分子。<br>
+        - 添加了 3 个成就。<br>
         <h3>v0.5.2</h3><br>
-        - Added RNA.<br>
-        - Added 2 Achievements.<br>
-        - Added 2 Milestones.<br>
+        - 添加了 RNA。<br>
+        - 添加了 2 个成就。<br>
+        - 添加了 2 个里程碑。<br>
         <h3>v0.5.1</h3><br>
-        - Added 6 Infecter and Quarantine Upgrades.<br>
-        - Added a buyable.<br>
-        - Made the game less laggy<br>
+        - 添加了 6 个感染体和隔离升级。<br>
+        - 添加了一个可购买项。<br>
+        - 减少了游戏卡顿<br>
         <h2 style = color:#93d281;>v0.5</h2><br>
-        - Added Infecters.<br>
-        - Added 7 more CV upgrades.<br>
-        - Added 11 more Achievements.<br>
+        - 添加了感染体。<br>
+        - 添加了 7 个更多的 CV 升级。<br>
+        - 添加了 11 个更多的成就。<br>
         <h3>v0.4.4</h3><br>
-        - Added Casual Virus.<br>
-        - Added more Casualty upgrades.<br>
-	    <h3>v0.4.3</h3><br>
-		- Added News Button.<br>
-        - Added Casualty (Infinity in AD).<br>
+        - 添加了随意病毒。<br>
+        - 添加了更多的伤亡升级。<br>
+        <h3>v0.4.3</h3><br>
+        - 添加了新闻按钮。<br>
+        - 添加了伤亡（AD 中的无限）。<br>
         <h3>v0.4.2</h3><br>
-		- Added News Ticker.<br>
-        - Added Fatality Dimension Shifts.<br>
+        - 添加了新闻滚动条。<br>
+        - 添加了致命维度转移。<br>
         <h3>v0.4.1</h3><br>
-		- Added Fatality.<br>
-        - Added Achievements.<br>
+        - 添加了致命性。<br>
+        - 添加了成就。<br>
         <h2 style = color:#93d281;>v0.4</h2><br>
-		- Added Symptom Challenges.<br>
-        - Rebalanced.<br>
+        - 添加了症状挑战。<br>
+        - 重新平衡。<br>
         <h3>v0.3.3</h3><br>
-        - Added Deaths.<br>
+        - 添加了死亡。<br>
         <h3>v0.3.2</h3><br>
-		- Added Recoveries.<br>
-        - Added more symptom upgrades.<br>
+        - 添加了康复。<br>
+        - 添加了更多的症状升级。<br>
         <h3>v0.3.1</h3><br>
-        - Added Symptoms.<br>
+        - 添加了症状。<br>
         <h2 style = color:#93d281;>v0.3</h2><br>
-		- Added Uncoater Challenges.<br>
-        - Added more uncoater upgrades.<br>
+        - 添加了脱壳体挑战。<br>
+        - 添加了更多的脱壳体升级。<br>
         <h3>v0.2.2</h3><br>
-		- Added more uncoater upgrades.<br>
-        - Made 1st uncoater upgrade based on best.<br>
+        - 添加了更多的脱壳体升级。<br>
+        - 使第一个脱壳体升级基于最佳值。<br>
         <h3>v0.2.1</h3><br>
-		- Added Uncoaters.<br>
-        - Added (hardcapped).<br>
-        - Renamed to Plague Tree (Vorona Cirus Treesease).<br>
+        - 添加了脱壳体。<br>
+        - 添加了（硬上限）。<br>
+        - 重命名为瘟疫树 (Vorona Cirus Treesease)。<br>
         <h2 style = color:#93d281;>v0.2</h2><br>
-        - Added Statistics.<br>
-        - Added Replicators.<br>
-        - Added (softcapped).<br>
-        - Renamed to Vorona Cirus Treesease.<br>
+        - 添加了统计信息。<br>
+        - 添加了复制体。<br>
+        - 添加了（软上限）。<br>
+        - 重命名为 Vorona Cirus Treesease。<br>
         <h2 style = color:#93d281;>v0.1</h2><br>
-        - Release (COVID Tree).<br>
-        - Added Virus Points.<br>
-        - Added Cases.<br>
-    `
+        - 发布（COVID 树）。<br>
+        - 添加了病毒点数。<br>
+        - 添加了病例。<br>
+`
 let winText = `Congratulations! You have reached the end and infected this game, but for now...`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
@@ -529,7 +529,7 @@ function fixOldSave(oldVersion){
             addPoints("a",-50)
         }
 	}
-    if (!inChallenge("ct",32) && player.uv.tree == "未接种"){
+    if (!inChallenge("ct",32) && player.uv.tree == "unvaxxed"){
         player.uv.tree = "normal"
     }
 }
