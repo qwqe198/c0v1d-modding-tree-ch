@@ -6046,35 +6046,35 @@ addLayer("uv", {
         eff = eff.add(1).mul(10).log10().pow(dil).sub(1).mul(exp).pow10()
         return eff
     },
-    microtabs: {
+ microtabs: {
         upg: {
-            "upg": {
+            "Upgrades": {
                 content: [
-                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "未增强病毒" && player.subtabs.uv.upg == "升级") return ["upgrades",[5,6,7,8,9,10]]},
+                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "UnBoosted Viruses" && player.subtabs.uv.upg == "Upgrades") return ["upgrades",[5,6,7,8,9,10]]},
                 ],
             },
-            "upg2": {
+            "Upgrades2": {
                 content: [
-                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "未增强病毒" && player.subtabs.uv.upg == "升级2") return ["upgrades",[11,12,13,14,15,16]]},
+                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "UnBoosted Viruses" && player.subtabs.uv.upg == "Upgrades2") return ["upgrades",[11,12,13,14,15,16]]},
                 ],
                 unlocked() {return hasUpgrade("uv",106)}
             },
-            "upg3": {
+            "Upgrades3": {
                 content: [
-                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "未增强病毒" && player.subtabs.uv.upg == "升级3") return ["upgrades",[17,18]]},
+                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "UnBoosted Viruses" && player.subtabs.uv.upg == "Upgrades3") return ["upgrades",[17,18]]},
                 ],
                 unlocked() {return false}
             },
-            "cool upg": {
+            "Cooldown Upgrades": {
                 content: [
-                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "未增强病毒" && player.subtabs.uv.upg == "冷却升级") return ["buyables",[2,3,4,5]]},
+                    function () {if (player.tab == "uv" && player.subtabs.uv.mainTabs == "UnBoosted Viruses" && player.subtabs.uv.upg == "Cooldown Upgrades") return ["buyables",[2,3,4,5]]},
                 ],
                 unlocked() {return true}
             },
         },
     },
     tabFormat: {
-        "main": {
+        "Main": {
         content:[
              ["display-text", 
                 function() {
@@ -6089,7 +6089,7 @@ addLayer("uv", {
             ["buyables",[1]],
             ]
         },
-        "upg": {
+        "Upgrades": {
             content:[
                 ["display-text", 
                 function() {
@@ -6153,7 +6153,7 @@ addLayer("uv", {
             ],
             unlocked() { return player.uv.uvUnlocked }
         },
-        "Mil": {
+        "Milestones": {
             content:[
                 ["display-text", 
                 function() {
@@ -6166,7 +6166,7 @@ addLayer("uv", {
             ],
             unlocked() { return player.uv.uvUnlocked }
         },
-        "buy": {
+        "Buyables": {
             content:[
                 ["display-text", 
                 function() {
